@@ -32,6 +32,7 @@ let connect =  function ( ) {
             console.log('HAHA) LOH)')
         } else {
             console.log("Connected");  
+            executeSql();
         }
               
 
