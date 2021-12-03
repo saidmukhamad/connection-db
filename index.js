@@ -2,7 +2,7 @@ const express = require('express');
 
 const app = express();
 
-const bd = require('./connection')
+const bd = require('./test_connection/requests')
 app.set('view engine', 'ejs')
 
 const PORT = 3001
@@ -15,11 +15,17 @@ const PORT = 3001
 
 app.get ('/start', (req,res) => {
 
-    let columns = bd.connect();
-    console.log(columns)
-    res.render(__dirname + '/pages/index', {
-         columns: columns
+    let promise = bd.startRequest();
+    promise.then(function(columns){
+        console.log(columns)
+        res.render(__dirname + '/pages/index', {
+            columns: columns
+        })
     })
+    // console.log(columns)
+    // res.render(__dirname + '/pages/index', {
+    //      columns: columns
+    // })
 }) 
 
 

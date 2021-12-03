@@ -15,9 +15,9 @@
             <h1>Top Students</h1>
             <ul>
                 
-                <% columns %>
-                    
-                
+                <% columns.forEach(function(column){ %>
+                    <li> <%= column.value %></li>
+                <% }); %>
             </ul>
         </div>
     </main>

@@ -1,5 +1,6 @@
 var Connection = require('tedious').Connection;
-
+var response = {};
+var counter = 1;
 
 var config = {  
     server: 'DESKTOP-5PENVSL',  
@@ -18,44 +19,59 @@ var config = {
 
 
 exports.ConnectToDb = function (requestS = 1) {
+
     var connection = new Connection(config); 
+    connection.connect()
     
 
-    connection.on('connect', function(err) {  
-        if(err) {
-            console.log(err);
-            
-        } else {
-            console.log("Connected");
-            
-            if (requestS != 1) {
-            const response = Execute(requestS);
-            console.log(response)
-        }
+    return new Promise (function(resolve, reject){
+        connection.on('connect', function(err) {  
+            if(err) {
+                reject(err);
+                
+            } else {
+                console.log("Connected");
+                
+                if (requestS != 1) {
+                var res = {};
+                const promise = Execute(requestS);
+                promise.then(function(columns){
+                    resolve(columns);
+                })
 
-        }              
+                console.log(res)      
+                };
+    
+            }   
+    })
+               
     
     }); 
 
-    connection.connect()
+
+    
 
     function Execute(requestS) {
         
-        connection.execSql(requestS);
+        return new Promise (function (resolve, reject){
+            connection.execSql(requestS);
+            requestS.on ('row', function(columns){
+                resolve(columns);
+            })
+        })
+    
+        // connection.execSql(requestS);
 
-        var counter = 1;
-        response = {};
-
-        requestS.on('row', function(columns){
-            response[counter] = {};
-            columns.forEach(function(column){
-                response[counter][column.metadata.colName] = column.value
-            });
-            counter+=1;
-        });
-        console.log('check', response)
-        return response;
+        // requestS.on('row', function(columns){
+            
+        // });
+        
     };
+
+
+
+
+
 
     }
 

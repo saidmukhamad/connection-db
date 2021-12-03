@@ -9,8 +9,16 @@ var request = new Request ("SELECT * FROM Students", function(err){
     
 })
 
-connect.ConnectToDb(request);
 
 
+exports.startRequest = function (){
 
+    return new Promise (function(resolve, reject){
+        let promise = connect.ConnectToDb(request);
+        
+        promise.then (function(result){
+            resolve(result);
+        })
+    })
 
+}
