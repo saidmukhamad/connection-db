@@ -35,11 +35,10 @@ exports.ConnectToDb = function (requestS = 1) {
                 if (requestS != 1) {
                 var res = {};
                 const promise = Execute(requestS);
-                promise.then(function(columns){
-                    resolve(columns);
+                promise.then(function(res){
+                    resolve(res);
                 })
 
-                console.log(res)      
                 };
     
             }   
@@ -55,17 +54,80 @@ exports.ConnectToDb = function (requestS = 1) {
         
         return new Promise (function (resolve, reject){
             connection.execSql(requestS);
-            requestS.on ('row', function(columns){
-                resolve(columns);
-            })
-        })
-    
-        // connection.execSql(requestS);
+            // console.log(requestS)
 
-        // requestS.on('row', function(columns){
-            
-        // });
-        
+            var response = [];
+            var count = 1;
+
+            requestS.on('columnMetadata', function (columns) {
+                let response = [];
+                let count = 0;
+                columns.forEach(function(column){
+                    // response[count] = column.colName;
+                })
+                // console.log(response)
+             });
+
+            // requestS.on ('row', function(columns){
+            //     // columns.forEach(function(column){
+            //     //     response[count] = column;
+            //     //     count++;
+            //     // })
+            //     // console.log(response)
+            //     // console.log(columns);
+            //     // resolve(columns);   
+            //     // console.log(columns)
+            //     // resolve(columns)
+            //     console.log(`вызов on row`)
+            // })
+
+            // requestS.on ('done', function(rowCount, more, rows){
+            //     // columns.forEach(function(column){
+            //     //     response[count] = column;
+            //     //     count++;
+            //     // })
+            //     // console.log(response)
+            //     // console.log(rowCount)
+
+            //     // resolve(rows);   
+            //     console.log('вызов on done')            
+            // })
+
+            // requestS.on('requestCompleted', function(){
+            //     console.log('request completed')
+            // })
+
+    
+            // console.log(response)
+            // resolve(response);
+
+            requestS.on('row', (row) => {
+                saveRow(row)
+                // console.log(row)
+            })
+            // const mass = requestS.on('row', row);
+            // console.log(mass)
+            // requestS.on('done', requestDone);
+
+
+            async function row (columns){
+                
+                columns.forEach((column) => {
+                    saveRow(column)
+                })
+                // console.log(values, back)
+                // return await values;
+            }
+
+            function saveRow(column){
+                response[count] = column.value ;
+                count++
+            }
+
+           resolve(response)
+
+
+        })
     };
 
 

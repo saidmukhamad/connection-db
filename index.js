@@ -2,30 +2,26 @@ const express = require('express');
 
 const app = express();
 
-const bd = require('./test_connection/requests')
+const bd = require('./connection/connection.js')
 app.set('view engine', 'ejs')
 
 const PORT = 3001
 
-// app.get ('/start', (req,res) => {
-//     res.render( './pages/index.ejs')
-// })
 
-// in start
 
 app.get ('/start', (req,res) => {
-
-    let promise = bd.startRequest();
+    state = 'Select * from Uplans'
+    let promise = bd.sqlReq(state);
     promise.then(function(columns){
-        console.log(columns)
-        res.render(__dirname + '/pages/index', {
-            columns: columns
-        })
+            columns.forEach( (column, index) => {
+               console.log(Object.getOwnPropertyNames(column))
+                // console.log(column)
+            });
+        res.render(__dirname+'/pages/index', {
+             columns: columns
+         })
     })
-    // console.log(columns)
-    // res.render(__dirname + '/pages/index', {
-    //      columns: columns
-    // })
+  
 }) 
 
 
