@@ -13,6 +13,8 @@
     <main>
         <div>
             <h1>Top Students</h1>
+
+            <% table.forEach(columns => { %>
             
                 <table>
                     <thead>
@@ -36,15 +38,17 @@
                             </tr> 
                         <% }); %>
 
-                        <button>  <a href="/HEH">
-                            change page
-                        </a> </button>
-                        
+                      
 
                     </tbody>
                 </table>    
+
+           <% }); %>
                 
-            
+           <button>  <a href="/HEH">
+            change page
+        </a> </button>
+        
         </div>
     </main>
 

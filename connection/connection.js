@@ -1,5 +1,7 @@
 
+const { request } = require('express')
 const sql = require('mssql')
+
   
 const config = {
   user: "HEHEH",
@@ -17,14 +19,14 @@ const config = {
   }
 }
 
-exports.sqlReq  = function (req = 'SELECT * FROM Students') {
+var sqlReq = exports.sqlReq  = function (req = 'SELECT * FROM Students') {
     return new Promise (function (resolve, reject) {
         sql.on('error', err => {
           console.log(err)
         })
         
         sql.connect(config).then(pool => {
-            
+         
             return pool.request().query(req)
 
         }).then(result => {
@@ -36,3 +38,30 @@ exports.sqlReq  = function (req = 'SELECT * FROM Students') {
 
 }
 
+exports.request = function (req) {
+  return new Promise (function (resolve, reject) {
+    let output = [];
+
+    let testa = req.length - 1;
+    console.log(testa)
+  
+    req.forEach ( (state, index) => {
+      let promise = sqlReq(state);
+  
+      promise.then(function (columns) {
+        output[index] = columns;
+  
+        if (testa == index) {
+          resolve(output)
+        }
+      })
+  
+      
+  
+    })
+  
+  
+    
+  })
+
+}
