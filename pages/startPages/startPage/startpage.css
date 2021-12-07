@@ -1,0 +1,106 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+#backForPage {
+    background-color: #E5E5E5;
+    background-color: #A7C2CA;
+}
+
+.PositionColor {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
+    border: none;
+    outline: none;
+    padding: 0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+
+    min-width: 761px;
+    min-height: 685px;
+    max-width: 761px;
+    max-height: 685px;
+
+}
+
+.PositionColor h1{
+ 
+    position: relative;
+    text-align: center;
+
+    top: 64px;
+
+    font-family: 'Arvo';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 66px;
+    line-height: 82px;
+
+    color: #FFFFFF;
+
+}
+
+.PositionColor button {
+    width: 422px;
+    height: 77px;
+
+    left: 22%;
+
+    border-radius: 13px;
+
+    font-family: 'Arvo';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 44px;
+
+    color: #FFFFFF;
+
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 13px;
+    filter: drop-shadow(3px 4px rgba(0, 0, 0, 0.25));
+    border: 0.1px solid  rgba(168, 166, 166, 0.85);;
+
+    /* border: none;
+    outline: none;
+    padding: 0;
+     */
+
+
+    
+}
+
+.PositionColor button:hover {
+    background: rgba(168, 166, 166, 0.85);
+    color: rgba(0, 0, 0, 0.85);
+}
+
+#logPosition {
+    position: absolute;
+    top: 50%;
+}
+
+#logPosition a {
+    position: absolute;
+}
+
+
+
+#regPosition {
+    position: absolute;
+    top: 67%;
+
+    
+}
+
+#regPosition a {
+    position: absolute;
+
+    width: 242px;
+    height: 44px;
+    
+}

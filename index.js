@@ -7,22 +7,28 @@ app.set('view engine', 'ejs')
 
 const PORT = 3001
 
+app.use (express.static(__dirname + '/pages/startPages'))
+
+var test = exports.test  = (variable) => {
+    console.log(variable);
+}
 
 app.post ('/', (req,res) => {
     console.log(req.body)
     
 })
 
-app.get('/', (req,res) => res.render(__dirname + '/pages/first') )
+app.get('/', (req,res) => res.render(__dirname + '/pages/startPages/startPage/startpage') )
 
+app.get('/reg', (req,res) => res.render(__dirname + '/pages/startpages/regPage/regPage.ejs'))
 
-
+app.get('/log', (req,res) => res.render(__dirname + '/pages/startPages/logPage/loginPage'))
 
     app.get ('/start', (req,res) => {
         state = 'Select * from Students'
         state1 = 'Select * from Directions'
 
-        stateTest = [state, state1];
+        stateTest = [state, state1, state,state,state,state,state,state,state,state,state,state,state,state,state,state,state];
 
         let tables = bd.request(stateTest);
 
@@ -32,7 +38,7 @@ app.get('/', (req,res) => res.render(__dirname + '/pages/first') )
                 table: table
             })
         })
-        // tablesW.forEach(columns => {
+        // tables.forEach(columns => {
         //     console.log(columns)
         // });
 
