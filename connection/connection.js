@@ -54,14 +54,11 @@ exports.request = function (req) {
         if (testa == index) {
           resolve(output)
         }
+        
       })
-  
-      
-  
+
     })
-  
-  
-    
+
   })
 
 }
