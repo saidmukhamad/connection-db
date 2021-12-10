@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser')
+const hash = require("hash.js")
 
 
 
@@ -19,6 +20,7 @@ const PORT = 3001
 
 
 app.use (express.static(__dirname + '/pages/startPages'))
+app.use (express.static(__dirname + '/pages'))
 
 var test = exports.test  = (variable) => {
     console.log(variable);
@@ -37,36 +39,49 @@ app.get('/', (req,res) => res.render(__dirname + '/pages/startPages/startPage/st
 
 app.get('/reg', (req,res) => res.render(__dirname + '/pages/startpages/regPage/regPage.ejs'))
 
-app.post('/reg', (req,res) => {mail.send(req.body);  res.redirect('http://localhost:3001/')})
+app.post('/reg', (req,res) => {
+    mail.send(req.body);
+    req.body.password = hash.sha256().update(req.body.password).digest('hex')
+    console.log(req.body); 
+    let state = [`exec registration '${req.body.name}','${req.body.surname}', '${req.body.patronymic}', '${req.body.date}',
+    '${req.body.phone}', '${req.body.email}', '${req.body.login}',
+    '${req.body.password}', ${req.body.roleId}`]
+    bd.request(state)
+    res.redirect('http://localhost:3001/')
+})
+
+app.get('/Movie', (req,res) => {
+    state = ['SELECT * FROM Movie'];
+
+
+    let tables = bd.request(state);
+
+
+    tables.then(table => {
+        res.render(__dirname + '/pages/MoviePages/MovieView.ejs', {
+            table: table
+        })
+    })
+})
+
+app.get('/MovieAdd', (req,res) => res.render(__dirname + '/pages/MoviePages/MovieAdmin/MovieAdd.ejs'))
+
+app.post('/MovieAdd', (req,res) => {
+    console.log(req.body); 
+    let state = [`exec addMovie '${req.body.title}','${req.body.length}', '${req.body.genre}', '${req.body.status}',
+    '${req.body.date}'`]
+    bd.request(state)
+    res.redirect('http://localhost:3001/Movie')
+})
 
 app.get('/log', (req,res) => res.render(__dirname + '/pages/startPages/logPage/loginPage'))
 
 app.get ('/start', (req,res) => {
-    state = `
-	select NumGr, COUNT( DISTINCT Students.NumSt) AS StudentsCount from Students, Balls
-    where Students.NumSt = Balls.NumSt and Balls.Ball >= 3
-    group by NumGr
-    having COUNT(Balls.Ball) >= 0
-    `
-    state1 = `
-	select Name from Disciplines, Uplans, Balls
-	where Disciplines.NumDisc = Uplans.NumDisc and Uplans.IdDisc = Balls.IdDisc
-	group by Name`
- 
-    state2 = `
-    select Students.NumGr, COUNT( DISTINCT Students.NumSt ) AS StudentsCount from Students, Balls
-	where Students.NumSt = Balls.NumSt and Balls.Ball >= 3
-	group by Students.NumGr
-	having COUNT(Balls.Ball) > 1
-    `
+    state = [];
 
-    state3 = `
-    select FIO from Students, Balls
-	where Students.NumSt = Balls.NumSt and Balls.Ball >= 3
-    `
-    stateTest = [state, state1,state2, state3];
+    stateArray = [state];
 
-    let tables = bd.request(stateTest);
+    let tables = bd.request(stateArray);
 
 
     tables.then(table => {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <link href=".\MoviePages\MovieAdmin\MovieAdd.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    
+
+    <div class = "PositionColor">
+
+        <a id = "arrow" href="/Movie">
+            <img src=".\regPage\arrow.png">
+        </a>
+
+        <h1 id = "CinemaStudio">
+            CinemaStudio
+        </h1>
+
+        <form action="/MovieAdd" method="post">
+            <p>Add Movie</p>
+
+            <input type="text" name="title"  placeholder="Title">
+            <input type="number" name="length" placeholder="Length">
+            <input type="patronymic" name = "genre" placeholder="Genre">
+             <select name="status" aria-placeholder="status"> 
+                <option value="0">вышел</option>
+                <option value="1" selected>не вышел</option>
+              </select>
+            <input type="date" name = "date" placeholder="date">
+
+            <button type = "submit" id = "log">
+                Add Movie
+            </button>
+            <a id = "space">  _</a>
+
+
+        </form>
+
+
+      
+
+    </div>
+
+</body>
+</html>

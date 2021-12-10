@@ -7,15 +7,35 @@ var config = {
     authentication: {
         type: 'default',
         options: {
-            userName: 'HEHEH', 
-            password: '1'  
+            userName: name, 
+            password: pass  
         }
     },
     options: {
-        database: 'Session'  
+        database: 'Studio'  
     }
 }; 
 
+exports.CheckConnection =  (req = {
+    login: "HEHEH",
+    password: '1',
+    count: 1
+})  => {
+    config[options].userName = req.login;
+    config[options].password = req.password;
+
+    connection.connect();
+    
+    return new Promise ((resolve, reject) => {
+        connection.on('server', (err) => {
+            if (err){
+                reject(err);
+            } else {
+                console.log("connect")
+            }
+        })
+    })
+}
 
 
 exports.ConnectToDb = function (requestS = 1) {

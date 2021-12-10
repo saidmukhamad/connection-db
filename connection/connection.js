@@ -6,10 +6,10 @@ const sql = require('mssql')
 const config = {
   user: "HEHEH",
   password: "1",
-  database: "Session",
+  database: "Studio",
   server: 'DESKTOP-5PENVSL',
   pool: {
-    max: 10,
+    max: 50,
     min: 0,
     idleTimeoutMillis: 30000
   },

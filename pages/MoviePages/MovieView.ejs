@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+</head>
+
+<body class="container">
+
+    <header>
+    </header>
+
+    <main>
+        <div>
+            <h1>ФИЛЬМЫ</h1>
+            
+            <% table.forEach(columns => { %>
+            
+                <table>
+                    <thead>
+                        <tr>
+                            <% Object.getOwnPropertyNames(columns[0]).forEach ( (headName) => { %>
+                                <th> <%= headName %>  </th>
+                                
+                             <% }) %>
+                            
+                        </tr>
+                       
+                    </thead>
+                    <tbody>
+                        <% columns.forEach(function(column, index){ %>
+                            <% column = Object.values(column) %>
+                            <tr>
+                                <% column.forEach((element, index) => { %>
+                                    <td> <%= element %> </td>
+                               <% }); %>
+                              
+                            </tr> 
+                        <% }); %>
+                        
+
+                      
+
+                    </tbody>
+                </table>    
+
+           <% }); %>
+                        <button>  <a href="/MovieAdd">
+                            Добавить фильм
+                        </a> </button>
+                        
+
+                    </tbody>
+                </table>    
+                
+            
+        </div>
+    </main>
+
+    <footer>
+
+</body>
+</html>
