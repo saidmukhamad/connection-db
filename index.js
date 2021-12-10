@@ -13,7 +13,12 @@ const mail = require('./sendEmail/email.js')
 
 
 app.set('view engine', 'ejs')
-app.use(bodyParser.urlencoded({extended:true}));
+
+app.use(bodyParser.urlencoded({
+    parameterLimit: 10000000,
+    limit: '2000mb',
+    extended: true
+  }));
 
 const PORT = 3001
 
@@ -73,6 +78,34 @@ app.post('/MovieAdd', (req,res) => {
     bd.request(state)
     res.redirect('http://localhost:3001/Movie')
 })
+
+
+
+app.get('/Scenario', (req,res) => {
+    state = ['SELECT * FROM Scenario'];
+
+
+    let tables = bd.request(state);
+
+
+    tables.then(table => {
+        res.render(__dirname + '/pages/ScenarioPages/ScenarioView.ejs', {
+            table: table
+        })
+    })
+})
+
+app.get('/ScenarioAdd', (req,res) => res.render(__dirname + '/pages/ScenarioPages/ScenarioAdmin/ScenarioAdd.ejs'))
+
+app.post('/ScenarioAdd', (req,res) => {
+    console.log(req.body); 
+    let state = [`exec addScenario '${req.body.author}','${req.body.title}', '${req.body.text}'`]
+    bd.request(state)
+    res.redirect('http://localhost:3001/Scenario')
+})
+
+
+
 
 app.get('/log', (req,res) => res.render(__dirname + '/pages/startPages/logPage/loginPage'))
 
