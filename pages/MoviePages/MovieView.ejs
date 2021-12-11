@@ -3,20 +3,23 @@
 
 
 <head>
+
+    <link href=".\MoviePages\MovieView.css" rel="stylesheet" type="text/css">
+
 </head>
 
-<body class="container">
+<body id = "backForPage">
 
     <header>
     </header>
 
     <main>
-        <div>
-            <h1>ФИЛЬМЫ</h1>
+        <div  class="PositionColor">
+            <h1>Films</h1>
             
             <% table.forEach(columns => { %>
             
-                <table>
+                <table >
                     <thead>
                         <tr>
                             <% Object.getOwnPropertyNames(columns[0]).forEach ( (headName) => { %>

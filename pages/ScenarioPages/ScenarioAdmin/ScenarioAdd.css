@@ -63,7 +63,7 @@ body {
     margin-top: 25px;
 
     position: relative;
-    width: 117px;
+    width: 280px;
     height: 44px;
     left: 22%;
     top: 36%;
@@ -83,9 +83,10 @@ body {
     width: 422px;
     height: 71px;
     left: 22%;
-    top: 44%;
+    top: 46%;
 
     text-indent: 12px;
+    
     
     font-family: 'Arvo';
     font-style: normal;
@@ -107,12 +108,15 @@ body {
 }
 
 .PositionColor textarea {
-    position: relative;
+    position: absolute;
     width: 422px;
-    height: 71px;
+    min-height: 71px;
     left: 22%;
-    top: 44%;
+    top: 50%;
 
+    resize: none;
+
+    margin-top: 1px;
     text-indent: 12px;
     
     font-family: 'Arvo';
@@ -198,11 +202,7 @@ body {
     color: rgba(255, 255, 255, 0.33);
 }
 #pass {
-    /* position: relative;
-    width: 422px;
-    height: 71px;
-    left: 22%;
-    top: 65%; */
+   
     
 
     color:white;
@@ -240,7 +240,7 @@ body {
 #log {
     position: relative;
     right: 21%;
-    top: 100px;
+    top: 450px;
     color:white;
 
     font-family: 'Arvo';

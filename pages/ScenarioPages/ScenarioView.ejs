@@ -4,22 +4,20 @@
 
 <head>
 </head>
+<link href=".\ScenarioPages\ScenarioView.css" rel="stylesheet" type="text/css">
 
-<body class="container">
-
-    <header>
-    </header>
+<body id = "backForPage">
 
     <main>
-        <div>
-            <h1>Сценарии</h1>
+        <div class = "PositionColor">
+            <h1>Scenario</h1>
             
             <% table.forEach(columns => { %>
             
-                <table>
+                <table style = "">
                     <thead>
                         <tr>
-                            <% Object.getOwnPropertyNames(columns).forEach ( (headName) => { %>
+                            <% Object.getOwnPropertyNames(columns[0]).forEach ( (headName) => { %>
                                 <th> <%= headName %>  </th>
                                 
                              <% }) %>
@@ -32,7 +30,28 @@
                             <% column = Object.values(column) %>
                             <tr>
                                 <% column.forEach((element, index) => { %>
-                                    <td> <%= element %> </td>
+                                   <% if (index == 3) { %>
+                                        <td>
+                                            <div id = "container">
+                                                <button id = "myBtn" style="color: white;">
+                                                    Script
+                                                </button>
+                                    
+                                                <div id = "myModal" class = "modal">
+                                                    <div class="modal-content">
+                                                       <!-- <% const regex = /\\n|\\r\\n|\\n\\r|\\r/g; %>
+                                                        <% element.replace(regex, '<br>'); %> -->
+                                                        <span class="close">&times;</span>                                                        
+                                                        <p style="white-space: pre-line; text-align: center;"><%= element %></p>
+                                                    </div>
+                                                </div>
+                                    
+                                            </div>
+                                        </td>
+                                        <%  } else { %>
+                                        <td> <%= element %> </td>
+                                   <% } %>
+                                    
                                <% }); %>
                               
                             </tr> 
@@ -45,7 +64,7 @@
                 </table>    
 
            <% }); %>
-                        <button>  <a href="/MovieAdd">
+                        <button id = "addNewObject"style = "height: 54px;">  <a href="/ScenarioAdd">
                             Добавить фильм
                         </a> </button>
                         
@@ -60,4 +79,34 @@
     <footer>
 
 </body>
+
+<script>
+    
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+          modal.style.display = "block";
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+    
+</script>
 </html>

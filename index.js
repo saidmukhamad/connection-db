@@ -61,7 +61,6 @@ app.get('/Movie', (req,res) => {
 
     let tables = bd.request(state);
 
-
     tables.then(table => {
         res.render(__dirname + '/pages/MoviePages/MovieView.ejs', {
             table: table
@@ -89,6 +88,7 @@ app.get('/Scenario', (req,res) => {
 
 
     tables.then(table => {
+        console.log(table)
         res.render(__dirname + '/pages/ScenarioPages/ScenarioView.ejs', {
             table: table
         })
@@ -109,12 +109,34 @@ app.post('/ScenarioAdd', (req,res) => {
 
 app.get('/log', (req,res) => res.render(__dirname + '/pages/startPages/logPage/loginPage'))
 
+app.post('/log', (req,res) => {
+    state = [`exec log_in '${req.body.login}', '${hash.sha256().update(req.body.password).digest('hex')}'`];
+
+
+    let tables = bd.request(state);
+
+    tables.then(table => {
+        table.forEach ( (log,index) => {
+            if(Object.getOwnPropertyNames(log[index]) === "")
+            if (log[index] == undefined) {
+                console.log("ПОШЁЛ НАХУЙ ОТСЮДА")
+                res.redirect('http://localhost:3001/reg')
+            }  else {
+                res.redirect('http://localhost:3001/MovieAdd')
+            }
+        }
+
+        )
+        
+
+    })
+})
+
 app.get ('/start', (req,res) => {
-    state = [];
+    state = ['select * from Movie', 'select * from Scenario'];
 
-    stateArray = [state];
 
-    let tables = bd.request(stateArray);
+    let tables = bd.request(state);
 
 
     tables.then(table => {
