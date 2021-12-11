@@ -1,0 +1,70 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+#backForPage {
+  background-color: #E5E5E5;
+  background-color: #A7C2CA;
+
+}
+
+.PositionColor {
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+ 
+
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
+  border: none;
+  outline: none;
+  padding: 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+
+  color: #FFFFFF;
+
+
+  min-width: 1366px;
+  min-height: 900px;
+  max-width: 1366px;
+  max-height: 900px;
+
+}
+
+
+
+.PositionColor button {
+  position: relative;
+  display: flex;
+  margin: auto 0;
+  width: 350px;
+  height: 152px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 13px;
+
+  font-family: Arvo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 66px;
+  line-height: 82px;
+}
+
+
+
+ h1 {
+  font-family: Arvo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 66px;
+  line-height: 82px;
+  /* identical to box height */
+
+  text-align: center;
+
+}
+
+#container {
+   position: relative;
+}

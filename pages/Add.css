@@ -35,27 +35,34 @@ body {
     max-width: 761px;
     max-height: 900px;
 
+    font-family: 'Arvo';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+
+    color: #FFFFFF;
+
+
 }
 
 .PositionColor h1 {
-    font-family: Arvo;
-    font-style: normal;
-    font-weight: bold;
+
     font-size: 66px;
     line-height: 82px;
-    /* identical to box height */
-
     text-align: center;
-    color: #FFFFFF;
 
 }
 
 .PositionColor button {
+    position: relative;
     width: 211px;
     height: 52px;
 
     background: rgba(0, 0, 0, 0.55);
     border-radius: 13px;
+
+
 }
 
 .PositionColor p {
@@ -68,13 +75,9 @@ body {
     left: 22%;
     top: 36%;
 
-    font-family: 'Arvo';
-    font-style: normal;
-    font-weight: bold;
     font-size: 36px;
     line-height: 44px;
 
-    color: #FFFFFF;
 
 }
 
@@ -131,85 +134,35 @@ body {
     color:white;
 }
 
-#login {
-   
-
-    text-indent: 12px;
-
-    
-    border: none;
-    margin-bottom: 22px;
-    
-    color:white;
-
-    font-family: 'Arvo';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 30px;
-    
-
-    background: rgba(0, 0, 0, 0.55);
-    border-radius: 13px;
-    filter: drop-shadow(3px 6px 4px rgba(0, 0, 0, 0.25));
-}
-
-#login:active {
-    border: 1px white;
-}
-
-#login::placeholder {
-    position: relative;
-
-    font-family: 'Arvo';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 30px;
-    /* identical to box height */
 
 
-
-    color: rgba(255, 255, 255, 0.33);
-}
-#pass {
-    /* position: relative;
+.PositionColor textarea {
+    position: absolute;
     width: 422px;
-    height: 71px;
+    min-height: 71px;
     left: 22%;
-    top: 65%; */
+    top: 50%;
+
+    resize: none;
+
+    margin-top: 1px;
+    text-indent: 12px;
     
-
-    color:white;
-
     font-family: 'Arvo';
     font-style: normal;
     font-weight: bold;
     font-size: 24px;
     line-height: 30px;
-    
+
+    margin-bottom: 22px;
+
+    border-radius: 13px;
     border: none;
     background: rgba(0, 0, 0, 0.55);
-    border-radius: 13px;
     filter: drop-shadow(3px 6px 4px rgba(0, 0, 0, 0.25));
+
+    color:white;
 }
-
-#pass::placeholder {
-    position: relative;
-    
-
-    font-family: 'Arvo';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 30px;
-    /* identical to box height */
-
-    
-    color: rgba(255, 255, 255, 0.33);
-}
-
-
 
 
 #log {
@@ -242,7 +195,6 @@ body {
 
     top: 33px;
     left: 15px;
-
 
 }
 

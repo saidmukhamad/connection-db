@@ -52,9 +52,13 @@ app.post('/reg', (req,res) => {
     '${req.body.phone}', '${req.body.email}', '${req.body.login}',
     '${req.body.password}', ${req.body.roleId}`]
     bd.request(state)
-    res.redirect('http://localhost:3001/')
+    res.redirect('http://localhost:3001/MainAdmin')
 })
 
+
+app.get('/MainAdmin', (req,res) => {
+    res.render(__dirname + '/pages/mainAdmin.ejs')
+})
 app.get('/Movie', (req,res) => {
     state = ['SELECT * FROM Movie'];
 
