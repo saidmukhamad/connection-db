@@ -3,20 +3,42 @@
 
 
 <head>
-    <link href=".\ScenarioPages\ScenarioView.css" rel="stylesheet" type="text/css">
+    <link href=".\AdminViews\Admin.css" rel="stylesheet" type="text/css">
 
 
 </head>
 
 <body id = "backForPage">
 
-    <main>
-        <div class = "PositionColor">
             <h1>Scenario</h1>
-            
+
+        <div class = "PositionColor" style = "margin-top: 25px;">
+            <div id = "location_nav">
+                <nav >
+                    <a onclick = "window.location.href='/Movie'">
+                    Movies
+                    </a>
+                    <a onclick = "window.location.href='/Scenario'" style="color: black;">
+                        Scenarios
+                    </a>
+                    
+                    <a onclick = "window.location.href='/Workers'">
+                        Workers
+                    </a>
+        
+                    <a onclick = "window.location.href='/Requests'">
+                        Requests
+                    </a>
+        
+                    <a onclick = "window.location.href='/Archive'">
+                        Archive
+                    </a>
+        
+                </nav>
+    
             <% table.forEach(columns => { %>
             
-                <table style = "">
+                <table>
                     <thead>
                         <tr>
                             <% Object.getOwnPropertyNames(columns[0]).forEach ( (headName) => { %>
@@ -41,8 +63,7 @@
                                     
                                                 <div id = "myModal" class = "modal">
                                                     <div class="modal-content">
-                                                       <!-- <% const regex = /\\n|\\r\\n|\\n\\r|\\r/g; %>
-                                                        <% element.replace(regex, '<br>'); %> -->
+                                                       
                                                         <span class="close">&times;</span>                                                        
                                                         <p style="white-space: pre-line; text-align: center;"><%= element %></p>
                                                     </div>
@@ -66,9 +87,12 @@
                 </table>    
 
            <% }); %>
-                        <button id = "addNewObject"style = "height: 54px;">  <a href="/ScenarioAdd">
+
+
+            </div>
+                        <!-- <button id = "addNewObject"style = "height: 54px;">  <a href="/ScenarioAdd">
                             Добавить фильм
-                        </a> </button>
+                        </a> </button> -->
                         
 
                     </tbody>
@@ -76,9 +100,7 @@
                 
             
         </div>
-    </main>
 
-    <footer>
 
 </body>
 

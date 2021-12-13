@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\AdminViews\Admin.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <h1>MOVIEs</h1>
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+
+        <div id = "location_nav">
+            <nav >
+                <a onclick = "window.location.href='/Movie'" style = "color: black;">
+                Movies
+                </a>
+                <a onclick = "window.location.href='/Scenario'">
+                    Scenarios
+                </a>
+                
+                <a onclick = "window.location.href='/Workers'">
+                    Workers
+                </a>
+    
+                <a onclick = "window.location.href='/Requests'">
+                    Requests
+                </a>
+    
+                <a onclick = "window.location.href='/Archive'">
+                    Archive
+                </a>
+    
+            </nav>
+
+            <% table.forEach(columns => { %>
+            
+                <table>
+                    <thead>
+                        <tr>
+                            <% Object.getOwnPropertyNames(columns[0]).forEach ( (headName) => { %>
+                                <th> <%= headName %>  </th>
+                                
+                             <% }) %>
+                            
+                        </tr>
+                       
+                    </thead>
+                    <tbody>
+                        <% columns.forEach(function(column, index){ %>
+                            <% column = Object.values(column) %>
+                            <tr>
+                                <% column.forEach((element, index) => { %>
+                                    <td> <%= element %> </td>
+                               <% }); %>
+                              
+                            </tr> 
+                        <% }); %>
+                        
+                            
+                      
+
+                    </tbody>
+                </table>    
+
+           <% }); %>
+                        <!-- <button id = "btnAddMovie">  <a href="/MovieAdd">
+                            Добавить фильм
+                        </a> </button> -->
+
+
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

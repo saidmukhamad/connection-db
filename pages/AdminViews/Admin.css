@@ -1,0 +1,142 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+
+
+#backForPage {
+  background-color: #E5E5E5;
+  background-color: #A7C2CA;
+
+}
+
+.PositionColor {
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+ 
+
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
+  border: none;
+  outline: none;
+  padding: 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+
+  color: #FFFFFF;
+
+
+  min-width: 1366px;
+  min-height: 900px;
+  max-width: 1366px;
+  max-height: 900px;
+
+}
+
+
+.PositionColor table {
+  position: relative;
+  top: 80px;
+  margin: 0  auto;
+
+  max-width: 1366px;
+
+}
+
+ h1 {
+  font-family: Arvo;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 66px;
+  line-height: 82px;
+  /* identical to box height */
+
+  text-align: center;
+
+}
+
+#container {
+   position: relative;
+}
+
+
+
+
+#location_nav {
+  position: relative;
+  width: 1210px;
+  height: 102px;
+
+  top: 60px;
+  margin: 0  auto;
+  
+
+}
+
+
+nav {
+   position: relative;
+   box-sizing: border-box;
+   display: inline-block;
+   top: 25%;
+   left: 11.6%;
+
+}
+
+
+nav a {
+   margin: 22px;
+   font-family: Arvo;
+   font-style: normal;
+   font-weight: 200;
+   font-size: 33px;
+   line-height: 39px;
+
+  
+}
+
+
+nav a:hover {
+   color:black;
+
+}
+
+
+#btnAddMovie {
+  position: absolute;
+  top: -22%;
+}
+
+
+
+#container {
+  position: relative;
+}
+
+[id^=modal] {
+  display: none;
+  border: 1px solid red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  min-height: 3em;
+  min-width: 5em;
+  max-width: 10em;
+  color:#FFFFFF;
+  }
+input[type=checkbox] {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  }
+#modal1:target {
+  display: block;
+  }
+#modal2:target {
+  display: block;
+  }
+[id^=modal] a {
+  float: right;
+  }

@@ -12,3 +12,18 @@ let test2 = hash.sha512().update('ba7816bf8f01cfea414140de5dae2223b00361a396177a
 console.log(test)
 console.log(test1)
 console.log(test2)
+
+
+let tester = {
+    IdWorker: 7,
+    name: 'Abdulmutalib',
+    surname: 'Ramazanov',
+    patronymic: 'Magomedovich',
+    phone: '79111217795',
+    email: 'aliev.st@edu.spbstu.ru',
+    login: 'abdul',
+    roleId: 1,
+    state: true
+  }
+
+  console.log(tester.IdWorker)

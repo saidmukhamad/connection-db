@@ -57,8 +57,14 @@ app.post('/reg', (req,res) => {
 
 
 app.get('/MainAdmin', (req,res) => {
-    res.render(__dirname + '/pages/mainAdmin.ejs')
+    res.render(__dirname + '/pages/Admin.ejs')
 })
+
+app.put('/MainAdmin', (req,res) => {
+    console.log(req.body);
+    res.redirect('http://localhost:3001/Admin')
+})
+
 app.get('/Movie', (req,res) => {
     state = ['SELECT * FROM Movie'];
 
@@ -66,11 +72,13 @@ app.get('/Movie', (req,res) => {
     let tables = bd.request(state);
 
     tables.then(table => {
-        res.render(__dirname + '/pages/MoviePages/MovieView.ejs', {
+        res.render(__dirname + '/pages/AdminViews/MovieAdmin', {
             table: table
         })
     })
 })
+
+
 
 app.get('/MovieAdd', (req,res) => res.render(__dirname + '/pages/MoviePages/MovieAdmin/MovieAdd.ejs'))
 
@@ -83,6 +91,20 @@ app.post('/MovieAdd', (req,res) => {
 })
 
 
+app.get('/Workers', (req,res) => {
+    state = 'SELECT IdWorker, name, surname, patronymic, birthdate, phone, email, login, roleId, state FROM StudioWorker';
+
+
+    let tables = bd.sqlReq(state);
+
+
+    tables.then(table => {
+        console.log(table)
+        res.render(__dirname + '/pages/AdminViews/WorkersAdmin.ejs', {
+            table: table
+        })
+    })
+})
 
 app.get('/Scenario', (req,res) => {
     state = ['SELECT * FROM Scenario'];
@@ -92,8 +114,8 @@ app.get('/Scenario', (req,res) => {
 
 
     tables.then(table => {
-        console.log(table)
-        res.render(__dirname + '/pages/ScenarioPages/ScenarioView.ejs', {
+        // console.log(table)
+        res.render(__dirname + '/pages/AdminViews/ScenarioAdmin.ejs', {
             table: table
         })
     })
@@ -103,7 +125,7 @@ app.get('/ScenarioAdd', (req,res) => res.render(__dirname + '/pages/ScenarioPage
 
 app.post('/ScenarioAdd', (req,res) => {
     console.log(req.body); 
-    let state = [`exec addScenario '${req.body.author}','${req.body.title}', '${req.body.text}'`]
+    let state = [` exec addScenario '${req.body.author}','${req.body.title}', '${req.body.text}'`]
     bd.request(state)
     res.redirect('http://localhost:3001/Scenario')
 })
@@ -115,19 +137,22 @@ app.get('/log', (req,res) => res.render(__dirname + '/pages/startPages/logPage/l
 
 app.post('/log', (req,res) => {
     state = [`exec log_in '${req.body.login}', '${hash.sha256().update(req.body.password).digest('hex')}'`];
-
+    console.log(req.body)
 
     let tables = bd.request(state);
 
     tables.then(table => {
         table.forEach ( (log,index) => {
-            if(Object.getOwnPropertyNames(log[index]) === "")
+            console.log(log)
+            if (log[index].roleId == 1) {
+                console.log("МАЛИНА АЛИНА ЯГОДЫ ТУДА СЮДА")
+            }
             if (log[index] == undefined) {
                 console.log("ПОШЁЛ НАХУЙ ОТСЮДА")
                 res.redirect('http://localhost:3001/reg')
             }  else {
                 res.redirect('http://localhost:3001/MovieAdd')
-            }
+            } 
         }
 
         )
