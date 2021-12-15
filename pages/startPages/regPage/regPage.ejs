@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 
+    <% if (status == 1) { %>
+        <%- include('./thanks.ejs') %>
+    <% } else { %>
 
 <head>
     <link href=".\regPage\regPage.css" rel="stylesheet" type="text/css">
@@ -22,6 +25,12 @@
         </h1>
 
         <form action="/reg" method="post">
+        
+             <% if (status == 0){ %>
+                <p id = "sadReg">Fail registration</p>
+            <% } %>
+
+
             <p>Registration</p>
 
             <input type="name" name="name" id="login" placeholder="name">
@@ -48,9 +57,9 @@
         </form>
 
 
-      
-
+    
     </div>
 
 </body>
+<% } %>
 </html>

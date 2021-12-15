@@ -9,8 +9,7 @@
 
 <body id = "backForPage">
 
-    
-
+   
     <div class = "PositionColor">
 
         <a id = "arrow" href="/">
@@ -21,8 +20,12 @@
             CinemaStudio
         </h1>
 
+        <% if (status == 0) {%>
+            <p id = "statusLog">Incorrect login or password</p>
+        
+
         <form action="/log" method="post">
-            <p>Log in</p>
+            <p style = "margin-top: 0px;">Log in</p>
             <input type="login" name="login" id="login" placeholder="login">
             <input type="password" name = "password" id = "pass" placeholder="password">
 
@@ -30,7 +33,17 @@
                 Log in
             </button>
         </form>
-
+        <% }  else { %>
+            <form action="/log" method="post">
+                <p>Log in</p>
+                <input type="login" name="login" id="login" placeholder="login">
+                <input type="password" name = "password" id = "pass" placeholder="password">
+    
+                <button type = "submit" id = "log">
+                    Log in
+                </button>
+            </form>
+        <% } %>
 
       
 

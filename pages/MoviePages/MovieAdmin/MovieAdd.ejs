@@ -9,11 +9,11 @@
 
 <body id = "backForPage">
 
-    
-
+    <% let data = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`%>
+    <% console.log(data) %>
     <div class = "PositionColor">
 
-        <a id = "arrow" href="/Movie">
+        <a id = "arrow" href="<%= data %>">
             <img src=".\regPage\arrow.png">
         </a>
 
@@ -32,9 +32,9 @@
                 <option value="1" selected>не вышел</option>
               </select>
             <input type="date" name = "date" placeholder="date">
-
-            <button type = "submit" id = "log">
-                Add Movie
+           
+            <button type = "submit" id = "log" >
+                <a href="<%=data%>">Add Movie</a>
             </button>
         
 

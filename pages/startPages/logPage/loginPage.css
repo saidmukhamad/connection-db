@@ -51,7 +51,7 @@
 
 .PositionColor p {
     
-    margin-top: 125px;
+    margin-top: 90px;
 
     position: relative;
     width: 117px;
@@ -67,6 +67,10 @@
 
     color: #FFFFFF;
 
+}
+
+#statusLog {
+    position: relative; width: 500px; line-height: 32px; font-size: 22px; margin-top: 0px;
 }
 
 #login {

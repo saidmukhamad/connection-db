@@ -9,8 +9,10 @@ const app = express();
 
 const bd = require('./connection/connection.js')
 const mail = require('./sendEmail/email.js')
+const defaultQuery = "login='${log[index].login}'&password='${log[index].password}'&state='${log[index].password}'&roleId='${log[index].roleId}";
 
 
+  
 
 app.set('view engine', 'ejs')
 
@@ -27,99 +29,241 @@ const PORT = 3001
 app.use (express.static(__dirname + '/pages/startPages'))
 app.use (express.static(__dirname + '/pages'))
 
-var test = exports.test  = (variable) => {
-    console.log(variable);
-}
 
-app.post ('/', (req,res) => {
-    console.log(req.body)
-    
-})
-
-app.get ('/approve', (req,res) => {
-    res.render (__dirname + '/pages/startPages/regPage/thanks.ejs')
-})
+// Основная страница и её загрузка
 
 app.get('/', (req,res) => res.render(__dirname + '/pages/startPages/startPage/startpage') )
 
-app.get('/reg', (req,res) => res.render(__dirname + '/pages/startpages/regPage/regPage.ejs'))
+
+// Страница регистрации
+
+app.get('/reg', (req,res) => {
+    if (req.query.status != undefined) {res.render(__dirname + '/pages/startpages/regPage/regPage.ejs', {
+        status: req.query.status
+
+    })} else {
+    res.render(__dirname + '/pages/startpages/regPage/regPage.ejs', {
+        status: 2
+    }) }
+})
 
 app.post('/reg', (req,res) => {
-    mail.send(req.body);
+    
     req.body.password = hash.sha256().update(req.body.password).digest('hex')
     console.log(req.body); 
     let state = [`exec registration '${req.body.name}','${req.body.surname}', '${req.body.patronymic}', '${req.body.date}',
     '${req.body.phone}', '${req.body.email}', '${req.body.login}',
     '${req.body.password}', ${req.body.roleId}`]
-    bd.request(state)
-    res.redirect('http://localhost:3001/MainAdmin')
+
+    let answer = bd.request(state);
+    answer.then(ans => {
+        console.log("answer here")
+        if (ans != undefined) {
+            res.redirect('http://localhost:3001/reg?status=0')
+        } else {
+            mail.send(req.body);
+            res.redirect('http://localhost:3001/reg?status=1')
+        }
+
+    })
+})
+
+// Страница входа в систему
+
+app.get('/log', (req,res) => {
+    if (req.query.status != undefined) { res.render(__dirname + '/pages/startPages/logPage/loginPage', {status: req.query.status})
+    } else {
+        res.render(__dirname + '/pages/startPages/logPage/loginPage', {status: 2})
+    }
+    
 })
 
 
-app.get('/MainAdmin', (req,res) => {
-    res.render(__dirname + '/pages/Admin.ejs')
-})
-
-app.put('/MainAdmin', (req,res) => {
-    console.log(req.body);
-    res.redirect('http://localhost:3001/Admin')
-})
-
-app.get('/Movie', (req,res) => {
-    state = ['SELECT * FROM Movie'];
+// Непосредственно вход. нужно правильно настроить редирект исходя из роли сотрудника
 
 
+app.post('/log', (req,res) => {
+    state = [`exec log_in '${req.body.login}', '${hash.sha256().update(req.body.password).digest('hex')}'`];
+    console.log(req.body)
+    
     let tables = bd.request(state);
 
     tables.then(table => {
-        res.render(__dirname + '/pages/AdminViews/MovieAdmin', {
-            table: table
-        })
+        table.forEach ( (log,index) => {
+            console.log(log)
+            if (log[index] == undefined) {
+                res.redirect('http://localhost:3001/log?status=0')
+            }  else if (log[index].roleId = 1) {     
+                res.redirect(`http://localhost:3001/MovieAdmin?login=${log[index].login}&password=${log[index].password}&state=${log[index].state}&roleId=${log[index].roleId}`);
+             } else if (log[index].roleId = 2) {
+                res.redirect(`http://localhost:3001/MovieDirector?login=${log[index].login}&password=${log[index].password}&state=${log[index].state}&roleId=${log[index].roleId}`)
+             } else if (log[index].roleId = 3) {
+                res.redirect(`http://localhost:3001/MovieActor?login=${log[index].login}&password=${log[index].password}&state=${log[index].state}&roleId=${log[index].roleId}`)
+             } 
+            }
+
+        )
+        
+
     })
 })
 
 
 
-app.get('/MovieAdd', (req,res) => res.render(__dirname + '/pages/MoviePages/MovieAdmin/MovieAdd.ejs'))
+// Страницы которые видит админ при входе
+
+app.get('/MainAdmin', (req,res) => {
+    res.render(__dirname + '/pages/Admin.ejs')
+})
+
+
+// Админский вид на фильмы
+
+app.get('/MovieAdmin', (req,res) => {
+
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+        state = ['SELECT * FROM Movie'];
+
+        let tables = bd.request(state);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+
+        tables.then(table => {
+
+            res.render(__dirname + '/pages/AdminViews/MovieAdmin', {
+                table: table,
+                session: session
+            })
+        })
+    })
+}
+})
+
+
+// Добавление фильма
+
+app.get('/MovieAdd', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+    let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+        else {
+            res.render(__dirname + '/pages/MoviePages/MovieAdmin/MovieAdd.ejs', {
+                session: session
+            })
+        }
+    })
+    }
+})
 
 app.post('/MovieAdd', (req,res) => {
     console.log(req.body); 
     let state = [`exec addMovie '${req.body.title}','${req.body.length}', '${req.body.genre}', '${req.body.status}',
     '${req.body.date}'`]
     bd.request(state)
-    res.redirect('http://localhost:3001/Movie')
+    // res.redirect('http://localhost:3001/MovieAdmin')
 })
 
 
-app.get('/Workers', (req,res) => {
-    state = 'SELECT IdWorker, name, surname, patronymic, birthdate, phone, email, login, roleId, state FROM StudioWorker';
 
-
-    let tables = bd.sqlReq(state);
-
-
-    tables.then(table => {
-        console.log(table)
-        res.render(__dirname + '/pages/AdminViews/WorkersAdmin.ejs', {
-            table: table
+function sampleOfGet() {
+    app.get('/MovieAdd', (req,res) => {
+        if (req.query == undefined) {
+            res.redirect('http://localhost:3001/log')
+        } else {
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let Session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+            else {
+                
+            }
+    
         })
+        }
     })
-})
-
-app.get('/Scenario', (req,res) => {
-    state = ['SELECT * FROM Scenario'];
+}
 
 
-    let tables = bd.request(state);
 
 
-    tables.then(table => {
-        // console.log(table)
-        res.render(__dirname + '/pages/AdminViews/ScenarioAdmin.ejs', {
-            table: table
+// Просмотр всех рабочих
+
+app.get('/WorkersAdmin', (req,res) => {
+
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+    let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+            else {
+                state = ['SELECT IdWorker, name, surname, phone, roleId, state FROM StudioWorker'];
+
+
+                let tables = bd.request(state);
+
+
+                tables.then(table => {
+                    console.log(table)
+                    res.render(__dirname + '/pages/AdminViews/WorkersAdmin.ejs', {
+                        table: table,
+                        session: session
+                    })
+                })
+            }
+
         })
-    })
+    }
 })
+    
+
+
+
+// Просмотр всех сценариев (Для админа и режиссёра)
+
+app.get('/ScenarioAdmin', (req,res) => {
+
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+    let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+            else {
+                state = ['SELECT title, author from Scenario'];
+
+
+                let tables = bd.request(state);
+
+
+                tables.then(table => {
+                    console.log(table)
+                    res.render(__dirname + '/pages/AdminViews/ScenarioAdmin.ejs', {
+                        table: table,
+                        session: session
+                    })
+                })
+            }
+
+        })
+    }
+})
+
+
+
+// Добавить сценарий
 
 app.get('/ScenarioAdd', (req,res) => res.render(__dirname + '/pages/ScenarioPages/ScenarioAdmin/ScenarioAdd.ejs'))
 
@@ -133,61 +277,90 @@ app.post('/ScenarioAdd', (req,res) => {
 
 
 
-app.get('/log', (req,res) => res.render(__dirname + '/pages/startPages/logPage/loginPage'))
 
-app.post('/log', (req,res) => {
-    state = [`exec log_in '${req.body.login}', '${hash.sha256().update(req.body.password).digest('hex')}'`];
-    console.log(req.body)
 
-    let tables = bd.request(state);
 
-    tables.then(table => {
-        table.forEach ( (log,index) => {
-            console.log(log)
-            if (log[index].roleId == 1) {
-                console.log("МАЛИНА АЛИНА ЯГОДЫ ТУДА СЮДА")
+
+
+
+// Запросы
+
+app.get('/RequestsAdmin', (req,res) => {
+
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+    let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+            else {
+                state = ['SELECT * from Request'];
+
+
+                let tables = bd.request(state);
+
+
+                tables.then(table => {
+                    console.log(table)
+                    res.render(__dirname + '/pages/AdminViews/RequestAdmin.ejs', {
+                        table: table,
+                        session: session
+                    })
+                })
             }
-            if (log[index] == undefined) {
-                console.log("ПОШЁЛ НАХУЙ ОТСЮДА")
-                res.redirect('http://localhost:3001/reg')
-            }  else {
-                res.redirect('http://localhost:3001/MovieAdd')
-            } 
-        }
 
-        )
-        
-
-    })
-})
-
-app.get ('/start', (req,res) => {
-    state = ['select * from Movie', 'select * from Scenario'];
-
-
-    let tables = bd.request(state);
-
-
-    tables.then(table => {
-        res.render(__dirname + '/pages/index', {
-            table: table
         })
-    })
-    
-}) 
-
-
-
-app.get('/HEH', (req,res) => {
-    state = 'Select * from Uplans'
-    let promise = bd.sqlReq(state);
-    promise.then(function(columns){
-        
-        res.render(__dirname+'/pages/heh', {
-             columns: columns
-         })
-    })
+    }
 })
+
+
+
+
+
+
+
+
+
+// Архив 
+
+app.get('/ArchiveAdmin', (req,res) => {
+
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+    let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+            else {
+                state = ['SELECT * from Movie Where state = 0'];
+
+
+                let tables = bd.request(state);
+
+                
+                tables.then(table => {
+                    console.log(table)
+                    res.render(__dirname + '/pages/AdminViews/ArchiveAdmin.ejs', {
+                        table: table,
+                        session: session
+                    })
+                })
+            }
+
+        })
+    }
+})
+
+
+
+
+
+
+
+
+
 
 
 app.listen (PORT, () => console.log(`server runnning on http://localhost:${PORT}/`))

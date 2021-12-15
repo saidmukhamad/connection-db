@@ -258,3 +258,11 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
+
+
+#sadReg {
+    position: relative;
+    color: #A7C2CA;
+    width: 500px;
+
+}

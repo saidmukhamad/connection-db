@@ -10,32 +10,40 @@
 
 <body id = "backForPage">
 
-    <h1>MOVIEs</h1>
+    <!-- <h1>MOVIEs</h1> -->
 
     <div class="PositionColor" style = "margin-top: 25px;">
 
         <div id = "location_nav">
             <nav >
-                <a onclick = "window.location.href='/Movie'" style = "color: black;">
+                <% let data = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data%>'" style = "color: black;">
                 Movies
                 </a>
-                <a onclick = "window.location.href='/Scenario'">
+                
+                <% let data1 = `/ScenarioAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data1%>'">
                     Scenarios
                 </a>
                 
-                <a onclick = "window.location.href='/Workers'">
+                <% let data2 = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data2%>'" >
                     Workers
                 </a>
-    
-                <a onclick = "window.location.href='/Requests'">
+
+                <% let data3 = `/RequestsAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data3%>'">
                     Requests
                 </a>
-    
-                <a onclick = "window.location.href='/Archive'">
+
+                <% let data4 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data4%>'">
                     Archive
                 </a>
     
-            </nav>
+            </nav>             
+        </div>
+    
 
             <% table.forEach(columns => { %>
             
@@ -68,10 +76,15 @@
                 </table>    
 
            <% }); %>
-                        <!-- <button id = "btnAddMovie">  <a href="/MovieAdd">
-                            Добавить фильм
-                        </a> </button> -->
 
+           <% let data_ = `/MovieAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <% console.log(data_) %>
+                <button style = " position: fixed; left: 50%; top: 50%; transform: translate(125%, 550%);
+                width: 211px; height: 52px; background: rgba(0, 0, 0, 0.55); border-radius: 13px; " id = "btnAddMovie">  
+                    <a style = "color:white"href="<%= data_ %>">Add Movie</a>
+                </button>
+                
+           
 
         </div>
     

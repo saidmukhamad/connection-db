@@ -10,7 +10,7 @@
 
 <body id = "backForPage">
 
-    <!-- <h1>ScnearioS</h1> -->
+    <!-- <h1>Archive</h1> -->
 
     <div class="PositionColor" style = "margin-top: 25px;">
 
@@ -22,12 +22,12 @@
                 </a>
                 
                 <% let data1 = `/ScenarioAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data1%>'" style = "color: black;">
+                <a onclick = "window.location.href='<%=data1%>'">
                     Scenarios
                 </a>
                 
                 <% let data2 = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data2%>'">
+                <a onclick = "window.location.href='<%=data2%>'" >
                     Workers
                 </a>
 
@@ -37,17 +37,32 @@
                 </a>
 
                 <% let data4 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data4%>'">
+                <a onclick = "window.location.href='<%=data4%>'" style = "color: black;">
                     Archive
                 </a>
     
             </nav>             
         </div>
     
+        <% if (table[0][0] == undefined) { %>
+            <h1 style = "
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -100%);
+           ">No films in arhive</h1>
 
-        
+            <% let data_ = `/MovieAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+            <button style = " position: fixed; left: 50%; top: 50%; transform: translate(-50%, 250%);
+                              width: 211px; height: 52px; background: rgba(0, 0, 0, 0.55); border-radius: 13px; "
+                             >  
+                <a  style = "color:white" href="<%=data_%>">Add Movie to Archive</a>
+            </button>
+
+       <%} else { %>
         <% table.forEach(columns => { %>
-            
+        
             <table>
                 <thead>
                     <tr>
@@ -77,14 +92,8 @@
             </table>    
 
        <% }); %>
-
-
-           <% let data_ = `/ScenarioAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-
-                <button id = "btnAddMovie">  
-                    <a href="<%=data_%>">Add Scenario</a>
-                </button>
-
+       <% } %>
+        
 
         </div>
     

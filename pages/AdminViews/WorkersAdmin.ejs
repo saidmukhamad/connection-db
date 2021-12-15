@@ -10,102 +10,61 @@
 
 <body id = "backForPage">
 
-    <h1>Workers</h1>
+    <!-- <h1>WorkerS</h1> -->
 
     <div class="PositionColor" style = "margin-top: 25px;">
 
         <div id = "location_nav">
             <nav >
-                <a onclick = "window.location.href='/Movie'">
+                <% let data = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data%>'">
                 Movies
                 </a>
-                <a onclick = "window.location.href='/Scenario'">
+                
+                <% let data1 = `/ScenarioAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data1%>'">
                     Scenarios
                 </a>
                 
-                <a onclick = "window.location.href='/Workers'" style = "color: black;">
+                <% let data2 = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data2%>'" style = "color: black;">
                     Workers
                 </a>
-    
-                <a onclick = "window.location.href='/Requests'">
+
+                <% let data3 = `/RequestsAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data3%>'">
                     Requests
                 </a>
-    
-                <a onclick = "window.location.href='/Archive'">
+
+                <% let data4 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data4%>'">
                     Archive
                 </a>
     
-            </nav>
+            </nav>             
+        </div>
+    
 
+            <% table.forEach(columns => { %>
+            
                 <table>
                     <thead>
-                        <tr>                            
+                        <tr>
+                            <% Object.getOwnPropertyNames(columns[0]).forEach ( (headName) => { %>
+                                <th> <%= headName %>  </th>
                                 
-                                <th>id</th>
-                                <th>name</th>
-                                <th>surname</th>
-                                <th>login</th>
-                                <th>state</th>
-                                <th>about</th>
-                                <% Object.getOwnPropertyNames(table[0]).forEach ( (headName) => { %>
-                                <% }) %>
+                             <% }) %>
                             
                         </tr>
-                       <% let MyModal = "#modal" ; let meme = 1;%>
+                       
                     </thead>
                     <tbody>
-                        <% table.forEach(function(column, index){ %>
+                        <% columns.forEach(function(column, index){ %>
                             <% column = Object.values(column) %>
                             <tr>
-                                <td><%= column[0] %></td>
-                                <td><%= column[1] %></td>
-                                <td><%= column[2] %></td>
-                                <td><%= column[7] %></td>
-                                <td><%= column[9] %></td>
-
-                                <td>
-                                    
-                            
-                                <a  href="<%= MyModal + meme %>">Open Modal</a>
-                                        <% console.log((MyModal + meme)) %>
-                                        <div id = "<%= MyModal + meme%>">
-                                            <% meme++ %>
-                                        <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Id</th>
-                                                            <th>name</th>
-                                                            <th>surname</th>
-                                                            <th>patronomyc</th>
-                                                            <th>birthdate</th>
-                                                            <th>phone</th>
-                                                            <th>email</th>
-                                                            <th>login</th>
-                                                            <th>roleid</th>
-                                                            <th>state</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><%= column[0] %></td>
-                                                            <td><%= column[1] %></td>
-                                                            <td><%= column[2] %></td>
-                                                            <td><%= column[3] %></td>
-                                                            <td><%= column[4] %></td>
-                                                            <td><%= column[5] %></td>
-                                                            <td><%= column[6] %></td>
-                                                            <td><%= column[7] %></td>
-                                                            <td><%= column[8] %></td>
-                                                            <td><%= column[9] %></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                
-                                    
-                                        </div>
-
-                                        </td>
-
+                                <% column.forEach((element, index) => { %>
+                                    <td> <%= element %> </td>
+                               <% }); %>
                               
                             </tr> 
                         <% }); %>
@@ -116,62 +75,19 @@
                     </tbody>
                 </table>    
 
-                        <!-- <button id = "btnAddMovie">  <a href="/MovieAdd">
-                            Добавить фильм
-                        </a> </button> -->
+           <% }); %>
 
+           <% let data_ = `/MovieAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
 
+            
         </div>
     
             
         
-        <!-- <div id="content">
-            <p>This is the content-container</p>
-            <a href="#modal1">Open first modal</a><br>
-            <a href="#modal2">Open second modal</a>
-          <div id="modal1"><a href="#">Close</a>This is the first modal</div>
-          <div id="modal2"><a href="#">Close</a>This is the second modal</div>
-        </div> -->
+       
 
      
     </div>
 
 </body>
-<script>
-//     // Get the button that opens the modal
-// var btn = document.querySelectorAll("button.modal-button");
-
-// // All page modals
-// var modals = document.querySelectorAll('.modal');
-
-// // Get the <span> element that closes the modal
-// var spans = document.getElementsByClassName("close");
-
-// // When the user clicks the button, open the modal
-// for (var i = 0; i < btn.length; i++) {
-//  btn[i].onclick = function(e) {
-//     e.preventDefault();
-//     modal = document.querySelector(e.target.getAttribute("href"));
-//     modal.style.display = "block";
-//  }
-// }
-
-// // When the user clicks on <span> (x), close the modal
-// for (var i = 0; i < spans.length; i++) {
-//  spans[i].onclick = function() {
-//     for (var index in modals) {
-//       if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
-//     }
-//  }
-// }
-
-// // When the user clicks anywhere outside of the modal, close it
-// window.onclick = function(event) {
-//     if (event.target.classList.contains('modal')) {
-//      for (var index in modals) {
-//       if (typeof modals[index].style !== 'undefined') modals[index].style.display = "none";    
-//      }
-//     }
-// }
-</script>
 </html>

@@ -1,5 +1,6 @@
 
 
+const req = require('express/lib/request')
 const sql = require('mssql')
 
   
@@ -33,12 +34,13 @@ var sqlReq = exports.sqlReq  = function (req = 'SELECT * FROM Students') {
             resolve(result.recordset);
         }).catch(err => {
             console.log(err)
+            resolve(err);
         });
     })
 
 }
 
-exports.request = function (req) {
+var request = exports.request = function (req) {
   return new Promise (function (resolve, reject) {
     let output = [];
 
@@ -62,3 +64,32 @@ exports.request = function (req) {
   })
 
 }
+
+
+var checkConnection = exports.checkConnection = (login, password, roleId) => {
+  return new Promise ((resolve,reject) => {
+    var checkRequest = [`Select * from StudioWorker where (login = '${login}') and (password = '${password}') and (state = 'true') and (roleId = '${roleId}')`]
+    let check = request(checkRequest)
+    check.then((answer) => {
+     if (answer[0][0] == undefined) {
+         resolve(false);
+       } else {
+         resolve(true);
+       }
+   })
+  }) 
+
+}
+
+
+let login = 'saidmukhamad'
+let password = 'aecb38da263d797ac748423906da24fae9da9ec444b6db4bee0de024319fe018';
+let roleId = 1;
+
+
+
+
+let answer = (checkConnection(login,password,roleId))
+answer.then(ans => {
+  console.log(ans)
+})
