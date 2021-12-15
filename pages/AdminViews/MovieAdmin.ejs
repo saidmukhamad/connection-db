@@ -50,23 +50,29 @@
                 <table>
                     <thead>
                         <tr>
-                            <% Object.getOwnPropertyNames(columns[0]).forEach ( (headName) => { %>
-                                <th> <%= headName %>  </th>
-                                
-                             <% }) %>
+                            <td>Title</td>
+                            <td>Length</td>
+                            <td>genre</td>
+                            <td>date</td>
                             
                         </tr>
                        
                     </thead>
                     <tbody>
                         <% columns.forEach(function(column, index){ %>
+
                             <% column = Object.values(column) %>
+                            <% let transmission = `/MovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${column[0]}`%> 
+
                             <tr>
-                                <% column.forEach((element, index) => { %>
-                                    <td> <%= element %> </td>
-                               <% }); %>
-                              
+                                <td><%=column[1] %></td>
+                                <td><%=column[2] %></td>
+                                <td><%=column[3] %></td>
+                                <td><%=column[4] %></td>
+                                <td><button><a href="<%= transmission %>">about</a></button></td>
                             </tr> 
+
+
                         <% }); %>
                         
                             

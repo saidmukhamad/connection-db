@@ -128,7 +128,7 @@ app.get('/MovieAdmin', (req,res) => {
 
     check.then(answer => {
         if (answer == false) {res.redirect('http://localhost:3001/log')}
-        state = ['SELECT * FROM Movie'];
+        state = ['SELECT idMovie, title, length, genre, date FROM Movie'];
 
         let tables = bd.request(state);
         let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
@@ -143,6 +143,39 @@ app.get('/MovieAdmin', (req,res) => {
     })
 }
 })
+
+
+// О фильме подробно
+
+app.get('/MovieAbout', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {               
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    state = [`SELECT * FROM Movie where idMovie = ${req.query.idMovie}`];
+
+
+                    let tables = bd.request(state);
+
+
+                    tables.then(table => {
+                        console.log(table)
+                        res.render(__dirname + '/pages/AdminViews/MovieAbout.ejs', {
+                            table: table,
+                            session: session
+                        })
+                    })
+                
+                }
+
+        })
+    }
+})
+
 
 
 // Добавление фильма
@@ -165,6 +198,7 @@ app.get('/MovieAdd', (req,res) => {
     }
 })
 
+
 app.post('/MovieAdd', (req,res) => {
     console.log(req.body); 
     let state = [`exec addMovie '${req.body.title}','${req.body.length}', '${req.body.genre}', '${req.body.status}',
@@ -180,15 +214,15 @@ function sampleOfGet() {
         if (req.query == undefined) {
             res.redirect('http://localhost:3001/log')
         } else {
-        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
-        let Session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
-        check.then(answer => {
-            if (answer == false) {res.redirect('http://localhost:3001/log')}
-            else {
+            let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+            let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+            check.then(answer => {
+                if (answer == false) {res.redirect('http://localhost:3001/log')}
+                    else {
                 
-            }
+                    }
     
-        })
+            })
         }
     })
 }

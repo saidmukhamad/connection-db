@@ -10,9 +10,15 @@
 
 <body id = "backForPage">
 
-    <!-- <h1>RequestS</h1> -->
+    <!-- <h1>WorkerS</h1> -->
+    <% let data_ = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+  
 
     <div class="PositionColor" style = "margin-top: 25px;">
+        
+        
+    
 
         <div id = "location_nav">
             <nav >
@@ -27,12 +33,12 @@
                 </a>
                 
                 <% let data2 = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data2%>'" >
+                <a onclick = "window.location.href='<%=data2%>'">
                     Workers
                 </a>
 
                 <% let data3 = `/RequestsAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data3%>'" style = "color: black;">
+                <a onclick = "window.location.href='<%=data3%>'">
                     Requests
                 </a>
 
@@ -41,12 +47,14 @@
                     Archive
                 </a>
     
-            </nav>             
+            </nav>     
+            <a id = "arrow"  href="<%= data_ %>">
+                <img src=".\regPage\arrow.png">
+            </a>
+                  
         </div>
     
-            <% if (table[0][0] == undefined) { %>
-                <h1>Запросов пока нет</h1>
-           <%} else { %>
+
             <% table.forEach(columns => { %>
             
                 <table>
@@ -72,21 +80,15 @@
                         <% }); %>
                         
                             
+                      
 
                     </tbody>
                 </table>    
 
            <% }); %>
-           <% } %>
+
+
             
-
-           <% let data_ = `/MovieAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-
-                <button id = "btnAddMovie">  
-                    <a href="<%=data_%>">Add Movie to Archive</a>
-                </button>
-
-
         </div>
     
             
