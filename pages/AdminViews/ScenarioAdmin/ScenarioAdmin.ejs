@@ -4,7 +4,7 @@
 
 <head>
 
-    <link href=".\AdminViews\Admin.css" rel="stylesheet" type="text/css">
+    <link href=".\AdminViews\ScenarioAdmin\ScenarioAdmin.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -15,25 +15,27 @@
     <div class="PositionColor" style = "margin-top: 25px;">
 
         <div id = "location_nav">
-            <nav >
+            <nav>
                 <% let data = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data%>'">
+                <a onclick = "window.location.href='<%=data%>'" >
                 Movies
                 </a>
                 
                 <% let data1 = `/ScenarioAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data1%>'" style = "color: black;">
+
+                <a onclick = "window.location.href='<%= data1 %>'" style = "color: black;" >
                     Scenarios
                 </a>
                 
-                <% let data2 = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data2%>'">
-                    Workers
-                </a>
-
                 <% let data3 = `/RequestsAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
                 <a onclick = "window.location.href='<%=data3%>'">
                     Requests
+                </a>
+
+                
+                <% let data2 = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data2%>'" >
+                    Workers
                 </a>
 
                 <% let data4 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
@@ -41,6 +43,12 @@
                     Archive
                 </a>
     
+                
+                <% let data5 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data5%>'">
+                    Profile
+                </a>
+
             </nav>             
         </div>
     
@@ -48,25 +56,26 @@
         
         <% table.forEach(columns => { %>
             
-            <table>
+            <table id = 'test'>
                 <thead>
-                    <tr>
-                        <% Object.getOwnPropertyNames(columns[0]).forEach ( (headName) => { %>
-                            <th> <%= headName %>  </th>
-                            
-                         <% }) %>
+                    <tr id = "hovertd">
+                        <td id = "TitleScenario">Title</td>
+                        <td id = "AuthorScenario">Author</td>
+                        <% let data_ = `/ScenarioAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+                        <td id = "addScenario"><a onclick = "window.location.href ='<%=data_%>'">add</a> </td>
                         
                     </tr>
                    
                 </thead>
-                <tbody>
+                <tbody id = "font">
                     <% columns.forEach(function(column, index){ %>
                         <% column = Object.values(column) %>
                         <tr>
-                            <% column.forEach((element, index) => { %>
-                                <td> <%= element %> </td>
-                           <% }); %>
-                          
+                                <% console.log(column) %> 
+                                <td id ="titleOfScenario"><%= column[0] %> </td>
+                                <td id = "authorOfScenario"><%= column[1] %></td>
+                                <td id = "aboutScenario"><button onclick="window.location.href = ''">about</button></td>
                         </tr> 
                     <% }); %>
                     
@@ -79,11 +88,8 @@
        <% }); %>
 
 
-           <% let data_ = `/ScenarioAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
 
-                <button id = "btnAddMovie">  
-                    <a href="<%=data_%>">Add Scenario</a>
-                </button>
+               
 
 
         </div>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\AdminViews\MovieAdmin\MovieAbout.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+   
+    <% let data_ = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+  
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+        
+        <a id = "arrow"  href="<%= data_ %>">
+            <img src=".\regPage\arrow.png">
+        </a>
+        <a id = "nearArrow">about</a>
+
+        <% let id = table[0][0].idMovie; let edit = `/MovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}` %> 
+        
+        <a id = "look" onclick="window.location.href = '<%= edit %>'"> Edit </a>
+
+
+            <div class = "about">
+                   <% console.log(table) %>  
+                
+             
+                    <% console.log(table) %> 
+
+                    <% console.log(table[0][0]) %> 
+
+                    
+                    
+                    <div id = "information">
+                        <form method="post">
+                            
+                            <input type="hidden" name="login" value="<%= session[0] %>">
+                            <input type="hidden" name="password" value="<%= session[1]%>">
+                            <input type="hidden" name="status" value="<%= session[2] %>">
+                            <input type="hidden" name="roleId" value="<%= session[3] %>">
+                            <input type="hidden" name="idMovie" value="<%= id %>">
+                            
+                            Title = <input name="title" value="<%= table[0][0].title %>" type="text" > 
+
+                            <p> Длина <input type="number" name = "length" value = "<%= table[0][0].length  %>"> </p>      
+                            <p> Genre  <input type="text" name="genre" id="" value='<%= table[0][0].genre  %>'> </p>
+                            <% let data = table[0][0].release.split('.'); console.log(data) %> 
+                            <p>Date     <input type="date" name="date" id="" value = "<%=`${data[2]}-${data[1]}-${data[0]}`%>"></p>
+        
+        
+        
+                                <% if(table[1][0] != undefined) { %>
+                                     <p>scenario <%= table[1][0].title%> <button style = "position: relative; top: -5px;" onclick  = "window.location.href=''">read</button></p>
+                                <% } else { %>
+                                    <p>Scenario <button  style = "position: relative; top: -5px;" onclick = "window.location.href=''">add</button></p>
+                                <% } %> 
+
+                                <button type = "submit"></button>
+                        </form>
+                   
+                   
+                   
+
+            
+
+                   
+
+            </div>    
+
+ 
+
+            
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

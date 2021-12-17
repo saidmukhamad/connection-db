@@ -131,7 +131,33 @@ nav a:hover {
 
 #arrow {
   position: absolute;
-  left: -5%;
-  top: -4%;
+  left: 1%;
+  top: 4%;
 
 } 
+
+
+
+.about {
+  min-width: 1000px;
+  min-height: 900px;
+  max-width: 1000;
+  max-height: 900px;
+}
+
+#information {
+  position: relative;
+  left: 15%;
+  top: 150px;
+  font-family: Arvo;
+  font-size: 33px;
+}
+
+#information button {
+  width: 100px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 8px;
+  color: white;
+  font-family: Arvo;
+}

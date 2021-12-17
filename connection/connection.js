@@ -1,6 +1,5 @@
 
 
-const req = require('express/lib/request')
 const sql = require('mssql')
 
   
@@ -20,7 +19,7 @@ const config = {
   }
 }
 
-var sqlReq = exports.sqlReq  = function (req = 'SELECT * FROM Students') {
+var sqlReq = exports.sqlReq  = function (req = 'SELECT * FROM MovieWorker') {
     return new Promise (function (resolve, reject) {
         sql.on('error', err => {
           console.log(err)

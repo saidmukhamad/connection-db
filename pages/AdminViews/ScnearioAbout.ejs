@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\AdminViews\Admin.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>WorkerS</h1> -->
+    <% let data_ = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+  
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+        
+        <a id = "arrow"  href="<%= data_ %>">
+            <img src=".\regPage\arrow.png">
+        </a>
+
+   
+
+            <% table.forEach(columns => { %>
+             
+                            <% Object.getOwnPropertyNames(columns[0]).forEach ( (headName) => { %>
+                                <th> <% headName %>  </th>
+                                
+                             <% }) %> 
+
+                            <% console.log(columns[0]) %> 
+
+                            
+                            <h1><%= columns[0].title %> </h1>
+                            
+                            <div>
+
+                                <a>Дата выхода <%= columns[0].date %> </a>
+
+                            
+                           
+                                <a>Длина фильма<%= columns[0].length  %> </a>
+                          
+                                <a>Жанр фильма<%= columns[0].genre  %> </a>
+                           
+                            <button>
+                                <a href="">
+                                    Move to Arhive
+                                </a>
+                            </button>
+
+                            <h1>вывести сценарий фильма</h1>
+                    
+
+           <% }); %>
+
+
+            
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

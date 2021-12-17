@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\AdminViews\MovieAdmin\MovieAbout.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>WorkerS</h1> -->
+    <% let data_ = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+  
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+        
+        <a id = "arrow"  href="<%= data_ %>">
+            <img src=".\regPage\arrow.png">
+        </a>
+        <a id = "nearArrow">about</a>
+        <% console.log('Dsdjl',table[0][0].idMovie) %> 
+
+        <% let id =table[0][0].idMovie; let look = `/MovieEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}` %> 
+        <%console.log(look)%>
+        <a id = "look" onclick="window.location.href = '<%= look %>'"> Look </a>
+
+            <div class = "about">
+                 
+
+
+                    
+                    
+                    <div id = "information">
+                        <p>Title = <%= table[0][0].title %> </p>                
+                  
+                        <p>length <%= table[0][0].length  %> </p>
+                  
+                        <p>Genre   <%= table[0][0].genre  %> </p>
+
+                        <p>date<%= table[0][0].release %> </p>
+
+
+                        <% if(table[1][0] != undefined) { %>
+                             <p>scenario <%= table[1][0].title%> <button style = "position: relative; top: -5px;" onclick  = "window.location.href=''">read</button></p>
+                        <% } else { %>
+                            <p>Scenario <button  style = "position: relative; top: -5px;" onclick = "window.location.href=''">add</button></p>
+                        <% } %> 
+                   
+                   
+
+            
+
+                   
+
+            </div>    
+
+ 
+
+            
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

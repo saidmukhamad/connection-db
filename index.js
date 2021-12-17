@@ -128,14 +128,14 @@ app.get('/MovieAdmin', (req,res) => {
 
     check.then(answer => {
         if (answer == false) {res.redirect('http://localhost:3001/log')}
-        state = ['SELECT idMovie, title, length, genre, date FROM Movie'];
+        state = [`SELECT idMovie, title, length, genre, FORMAT(date, 'dd.MM.yyyy') AS 'release' FROM Movie`];
 
         let tables = bd.request(state);
-        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId, req.query.sort];
 
         tables.then(table => {
 
-            res.render(__dirname + '/pages/AdminViews/MovieAdmin', {
+            res.render(__dirname + '/pages/AdminViews/MovieAdmin/MovieAdmin', {
                 table: table,
                 session: session
             })
@@ -156,15 +156,15 @@ app.get('/MovieAbout', (req,res) => {
         check.then(answer => {
             if (answer == false) {res.redirect('http://localhost:3001/log')}
                 else {
-                    state = [`SELECT * FROM Movie where idMovie = ${req.query.idMovie}`];
-
+                    state = [`	SELECT idMovie, title, length, genre, status, FORMAT(date, 'dd.MM.yyyy') AS 'release'  FROM Movie where idMovie = ${req.query.idMovie}`, 
+                            `exec WatchScenario ${req.query.idMovie}`];
 
                     let tables = bd.request(state);
 
 
                     tables.then(table => {
                         console.log(table)
-                        res.render(__dirname + '/pages/AdminViews/MovieAbout.ejs', {
+                        res.render(__dirname + '/pages/AdminViews/MovieAdmin/MovieAbout.ejs', {
                             table: table,
                             session: session
                         })
@@ -175,6 +175,64 @@ app.get('/MovieAbout', (req,res) => {
         })
     }
 })
+
+app.get('/MovieEdit', (req,res) => {
+
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {               
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    state = [`	SELECT idMovie, title, length, genre, status, FORMAT(date, 'dd.MM.yyyy') AS 'release'  FROM Movie where idMovie = ${req.query.idMovie}`, 
+                            `exec WatchScenario ${req.query.idMovie}`];
+
+                    let tables = bd.request(state);
+
+
+                    tables.then(table => {
+                        console.log(table)
+                        res.render(__dirname + '/pages/AdminViews/MovieAdmin/MovieEdit.ejs', {
+                            table: table,
+                            session: session
+                        })
+                    })
+                
+                }
+
+        })
+    }
+})
+
+
+app.post('/MovieEdit', (req, res) => {
+    if (req.body == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {               
+        let check = bd.checkConnection(req.body.login, req.body.password, req.body.roleId);
+        let session = [req.body.login, req.body.password, req.body.state, req.body.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+
+                    console.log(req.body.release)
+                    state = [`Update Movie set title = '${req.body.title}', length = ${req.body.length}, status = '${req.body.status}', date = '${req.body.date}', genre = '${req.body.genre}' where IdMovie = ${req.body.idMovie}`];
+
+                    let tables = bd.request(state);
+
+                    tables.then(() => {
+                        res.redirect(`http://localhost:3001/MovieAbout?login=${req.body.login}&password=${req.body.password}&state=${req.body.status}&roleId=${req.body.roleId}&idMovie=${req.body.idMovie}`)
+                    })
+                    
+                
+                }
+
+        })
+    }
+})
+
 
 
 
@@ -284,7 +342,7 @@ app.get('/ScenarioAdmin', (req,res) => {
 
                 tables.then(table => {
                     console.log(table)
-                    res.render(__dirname + '/pages/AdminViews/ScenarioAdmin.ejs', {
+                    res.render(__dirname + '/pages/AdminViews/ScenarioAdmin/ScenarioAdmin.ejs', {
                         table: table,
                         session: session
                     })
