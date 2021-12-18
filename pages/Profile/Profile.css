@@ -2,7 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
-
+html {
+    font-family: Arvo;
+    font-size: 25px;
+}
 
 #backForPage {
   background-color: #E5E5E5;
@@ -228,3 +231,73 @@ td  {
     overflow:auto;  
     margin-top:20px;
   }
+
+
+  #arrow img{
+    width: 83px;
+    height: 74px;
+   max-height: 74px;
+   max-width: 83px;
+  
+   left: 5px;
+  
+}
+  
+#arrow {
+   position: absolute;
+   left: -2px;
+   top: 14px;
+  
+} 
+  
+#nearArrow {
+
+    position: relative;
+    width: 54px;
+    height: 22px;
+    left: 76px;
+    top: 29px;
+
+    font-family: 'Arvo';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+}
+
+input {
+    border: 0;
+    outline: 0;
+    width: 350px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
+    font-family: 'Arvo';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+
+button {
+    
+    width: 105px;
+    height: 31px;
+   
+    
+    background: #FFFFFF;
+    border-radius: 3px;
+
+    border: 0;
+    outline: 0;
+    
+    
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
+
+    color: #000000;
+
+}

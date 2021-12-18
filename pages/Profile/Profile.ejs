@@ -4,7 +4,8 @@
 
 <head>
 
-    <link href=".\AdminViews\MovieAdmin\MovieAdmin.css" rel="stylesheet" type="text/css">
+    <link href="/Profile/Profile.css" rel="stylesheet" type="text/css">
+    <!-- C:\Users\saidm\Desktop\test\pages\Profile\Profile.ejs -->
 
 </head>
 
@@ -17,7 +18,7 @@
         <div id = "location_nav">
             <nav >
                 <% let data = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data%>'" style = "color: black;">
+                <a onclick = "window.location.href='<%=data%>'" >
                 Movies
                 </a>
                 
@@ -45,62 +46,48 @@
     
                 
                 <% let data5 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data5%>'">
+                <a onclick = "window.location.href='<%=data5%>'" style = "color: black;">
                     Profile
                 </a>
 
             </nav>             
+        </div >
+
+
+        <div style ="position: relative; left: 250px; top: 250px;">
+            <%console.log(table)%>
+        
+            <p>
+                <%= table[0][0].name %>
+            </p>
+            <p>
+                <%= table[0][0].surname %>
+            </p>
+            <p>
+                <%= table[0][0].patronymic %>
+            </p>
+            <p>
+                <%= table[0][0].birthdate%>
+            </p>
+            <p>
+                <%= table[0][0].phone %>
+            </p>
+
+            <p>
+                <%= table[0][0].email %>
+            </p>
+            <p>
+                <%= table[0][0].login %>
+            </p>
+            <p>
+                <%= table[0][0].roleId %>
+            </p>
+
+            <% let edit = `/ProfileEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`%> 
+
+            <a style = "color:black" onclick="window.location.href = '<%=edit%>' ">edit</a>
+           
         </div>
-    
-
-            <% table.forEach(columns => { %>
-            
-                <table>
-                    <thead>
-                        <tr id = "hovertd">
-                            <% let transition = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&sort='Title'&idSort=${session[4]}`  %> 
-                            <td onclick = "window.location.href='<%=data5%>'" id = "title">Title</td>
-                            <td id = "length">Length</td>
-                            <td id = "genre">genre</td>
-                            <td id = "date">date</td>
-
-                            <% let data_ = `/MovieAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-
-                            <td id = "add" onclick = "window.location.href='<%= data_ %>'">add</td>
-                            
-                        </tr>
-                       
-                    </thead>
-                    <div id = #tablescroll>
-                    <tbody id = "margin_test">
-
-                            <% columns.forEach(function(column, index){ %>
-
-                                <% column = Object.values(column) %>
-                                <% let transmission = `/MovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${column[0]}`%> 
-    
-                                <tr>
-                                    <td id = "titleOfMovie"><%=column[1] %></td>
-                                    <td style = "text-align: center ;" id = "lengthOfMovie"><%=column[2] %></td>
-                                    <td id = "genreOfMovie"><%=column[3] %></td>
-                                    <td id = "dateOfMovie"><%=column[4] %></td>
-                                    <td id = "addMovie"><button><a onclick = "window.location.href='<%= transmission %>'">about</a></button></td>
-                                </tr> 
-    
-    
-                            <% }); %>
-                        
-                       
-                        
-                            
-                      
-
-                    </tbody>
-                </div>
-                </table>    
-
-           <% }); %>
-
            
 
         </div>

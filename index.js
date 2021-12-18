@@ -118,11 +118,38 @@ app.get('/Profile', (req,res) => {
         check.then(answer => {
             if (answer == false) {res.redirect('http://localhost:3001/log')}
                 else {
-                    let state = [`Select * from StudioWorker where login = ${req.query.login}`];
+                    let state = [`Select idWorker, name, surname, patronymic, FORMAT(birthdate, 'dd.MM.yyyy') AS 'birthdate', phone, email, login, roleId from StudioWorker where login = '${req.query.login}'`];
                     state = bd.request(state);
 
                     state.then(table => {
+                        res.render(__dirname + '/pages/Profile/Profile.ejs', {
+                            table: table,
+                            session: session
+                        })
+                    })
+                }
 
+        })
+    }
+})
+
+app.get('/ProfileEdit', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    let state = [`Select idWorker, name, surname, patronymic, FORMAT(birthdate, 'dd.MM.yyyy') AS 'birthdate', phone, email, login, roleId from StudioWorker where login = '${req.query.login}'`];
+                    state = bd.request(state);
+
+                    state.then(table => {
+                        res.render(__dirname + '/pages/Profile/ProfileEdit.ejs', {
+                            table: table,
+                            session: session
+                        })
                     })
                 }
 
