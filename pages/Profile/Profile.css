@@ -2,28 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
-body{
-    font-family: arvo;
-}
-
-button {
-    width: 121.94px;
-    height: 43.3px;
-
-
-    background: #C4C4C4;
-    border-radius: 3px;
-    border: none;
-
-    
-    font-family: Arvo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-
-    color: #000000;
-}
 
 
 #backForPage {
@@ -85,34 +63,23 @@ button {
 }
 
 
-
-
-#test {
+.PositionColor thead {
     font-family: Arvo;
     font-style: normal;
     font-weight: bold;
     font-size: 24px;
     line-height: 30px;
-    /* identical to box height */
+
+    color: #FFFFFF;
 }
 
-#arrow img{
-    width: 83px;
-    height: 74px;
-   max-height: 74px;
-   max-width: 83px;
-  
-   left: 5px;
-  
+.PositionColor tbody {
+    position: relative;
+    top: 315px;
+    scroll-behavior: smooth;
+ 
+
 }
-  
-#arrow {
-   position: absolute;
-   left: 232px;
-   top: 14px;
-  
-
-
 
 #hovertd td:hover {
   color:black;
@@ -123,76 +90,141 @@ button {
     padding: 0px 0px 0px 0px;
 
 }
-
-td {
-    top: -60px;
-    padding: 40px 0px 0px 0px;
-}
-
-
-#TitleScenario {
+#title{
     position: absolute;
     width: 71.58px;
     height: 39.42px;
-    left: 344.68px;
-    top: 200.58px;
-}
-
-#AuthorScenario {
-    position: absolute;
-    width: 71.58px;
-    height: 39.42px;
-    left: 628.68px;
-    top: 200.58px;
-}
-
-#addScenario {
-    position: absolute;
-    width: 48px;
-    height: 30px;
-    left: 877px;
+    left: 176.68px;
     top: 200.58px;
     
+
+
 }
 
-#addScenario:hover {
-    color: black;
+#length{
+    
+    position: absolute;
+    width: 98.26px;
+    height: 39.42px;
+    left: 508.68px;
+    top: 200.58px;
+
 }
 
-#font {
+
+#genre {
+    position: absolute;
+    width: 89.77px;
+    height: 39.42px;
+    left: 808.26px;
+    top: 200.58px;
+}
+
+#date {
+    position: absolute;
+    width: 66.72px;
+    height: 39.42px;
+    left: 1004.79px;
+    top: 200.58px;
+}   
+
+
+#add {
+    position: absolute;
+    width: 36px;
+    height: 22px;
+    left: 1190px;
+    top: 200.58px;
+
+}
+
+#margin_test {
     font-family: Arvo;
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
     line-height: 22px;
 
+    color: #FFFFFF;
+    position: relative;
+
+}
+
+td  {
+    top: -60px;
+    padding: 40px 0px 0px 0px;
+    
+
+}
+
+
+
+
+
+#titleOfMovie {
+    position: relative;
+    left: 74.68px;
     text-align: center;
+
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #FFFFFF;
+    
 }
 
 
-#titleOfScenario {
+#lengthOfMovie {
     position: relative;
-    width: 222px;
-    height: 44px;
-    left: 262px;
-    top: 261px;
-
-
+    left: 270.68px;
+    margin: 20px;
 }
 
-#authorOfScenario {
+#genreOfMovie {
     position: relative;
-    width: 290px;
-    height: 22px;
-    left: 301px;
-    top: 261px;
+    left: 492px;
+    text-align: center;
+
 }
 
-#aboutScenario {
+#dateOfMovie {
     position: relative;
-    width: 117px;
-    height: 36px;
-    left: 320px;
-    top: 261px;
+    left: 588.79px;
+    
 
 }
+
+#addMovie {
+    position: relative;
+    left: 657px;
+
+}
+
+#addMovie button{
+    width: 121.94px;
+    height: 43.3px;
+
+
+    background: #C4C4C4;
+    border-radius: 3px;
+    border: none;
+
+    
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #000000;
+}
+
+
+#table-scroll {
+    height:150px;
+    overflow:auto;  
+    margin-top:20px;
+  }

@@ -96,22 +96,6 @@ button {
     /* identical to box height */
 }
 
-#arrow img{
-    width: 83px;
-    height: 74px;
-   max-height: 74px;
-   max-width: 83px;
-  
-   left: 5px;
-  
-}
-  
-#arrow {
-   position: absolute;
-   left: 232px;
-   top: 14px;
-  
-
 
 
 #hovertd td:hover {
@@ -179,6 +163,23 @@ td {
 
 
 }
+
+#arrow img{
+    width: 83px;
+    height: 74px;
+   max-height: 74px;
+   max-width: 83px;
+  
+   left: 5px;
+  
+}
+  
+#arrow {
+   position: absolute;
+   left: -2px;
+   top: 14px;
+  
+} 
 
 #authorOfScenario {
     position: relative;

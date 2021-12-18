@@ -63,7 +63,7 @@
                         <td id = "AuthorScenario">Author</td>
                         <% let data_ = `/ScenarioAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
 
-                        <td id = "addScenario"><a onclick = "window.location.href ='<%=data_%>'">add</a> </td>
+                        <td id = "addScenario"><a onclick = "window.location.href ='<%=data_ %>'">add</a> </td>
                         
                     </tr>
                    
@@ -73,9 +73,11 @@
                         <% column = Object.values(column) %>
                         <tr>
                                 <% console.log(column) %> 
-                                <td id ="titleOfScenario"><%= column[0] %> </td>
-                                <td id = "authorOfScenario"><%= column[1] %></td>
-                                <td id = "aboutScenario"><button onclick="window.location.href = ''">about</button></td>
+                                <td id ="titleOfScenario"><%= column[1] %> </td>
+                                <td id = "authorOfScenario"><%= column[2] %></td>
+                                <% let idScenario = column[0]; let read = `/ScenarioAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idScenario=${idScenario}` %> 
+                            
+                                <td id = "aboutScenario"><button onclick="window.location.href = '<%= read %>'">about</button></td>
                         </tr> 
                     <% }); %>
                     

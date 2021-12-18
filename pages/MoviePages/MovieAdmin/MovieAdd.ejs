@@ -24,17 +24,17 @@
         <form action="/MovieAdd" method="post">
             <p>Add Movie</p>
 
-            <input type="text" name="title"  placeholder="Title">
-            <input type="number" name="length" placeholder="Length">
-            <input type="patronymic" name = "genre" placeholder="Genre">
+            <input type="text" name="title"  pattern=".{4,}" required placeholder="Title">
+            <input type="number" name="length"  pattern=".{1,}" required  placeholder="Length">
+            <input type="patronymic"  pattern=".{4,}" required name = "genre" placeholder="Genre">
              <select name="status" aria-placeholder="status"> 
                 <option value="0">вышел</option>
                 <option value="1" selected>не вышел</option>
               </select>
-            <input type="date" name = "date" placeholder="date">
-           
+            <input type="date" name = "date" value = "2021-12-12"placeholder="date">
+            <input type="hidden" name="page" value = "<%=data%>">
             <button type = "submit" id = "log" >
-                <a onclick = "window.location.href='<%= data %>'">Add Movie</a>
+               Add Movie
             </button>
         
 

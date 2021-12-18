@@ -13,8 +13,9 @@
     
 
     <div class = "PositionColor">
+        <% let data1 = `/ScenarioAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
 
-        <a id = "arrow" href="/Scenario">
+        <a id = "arrow" href="<%= data1 %>">
             <img src=".\regPage\arrow.png">
         </a>
 
@@ -25,16 +26,18 @@
         <form action="/ScenarioAdd" method="post">
             <p>Add Scenario</p>
 
-            <input type="text" name="author"  placeholder="author">
-            <input type="text" name="title" placeholder="title">
-            <textarea name="text" id="" cols="30" rows="10" placeholder="scenario"></textarea>
+            <% let data = `/ScenarioAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`%>
+            <input type="hidden" name = "page" value="<%= data %>">
+            <input type="text" name="author" minlength="4" placeholder="author">
+            <input type="text" name="title" minlengt="4" placeholder="title">
+            <textarea minlength = "4"name="text" id="" cols="30" rows="10" placeholder="scenario"></textarea>
+     
             
 
             <button type = "submit" id = "logScenario">
-                Add Scenario
+               Add Scenario
             </button>
 
-            
 
 
         </form>
