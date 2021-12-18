@@ -157,6 +157,34 @@ app.get('/ProfileEdit', (req,res) => {
     }
 })
 
+app.post('/ProfileEdit', (req, res) => {
+    if (req.body == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {               
+        let check = bd.checkConnection(req.body.login, req.body.password, req.body.roleId);
+        let session = [req.body.login, req.body.password, req.body.state, req.body.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+
+                    console.log(req.body)
+                    state = [`Update StudioWorker set name = '${req.body.name}', surname= '${req.body.surname}', patronymic = '${req.body.patronymic}', phone = '${req.body.phone}',  birthdate = '${req.body.birthdate}', email = '${req.body.email}' where idWorker = ${req.body.idWorker}`];
+                    console.log(state)
+                    let tables = bd.request(state);
+
+                    tables.then(() => {
+                        res.redirect(`http://localhost:3001/Profile?login=${req.body.login}&password=${req.body.password}&state=${req.body.state}&roleId=${req.body.roleId}`)
+                    })
+                    
+                
+                }
+
+        })
+    }
+})
+
+
+
 // Страницы которые видит админ при входе
 
 app.get('/MainAdmin', (req,res) => {
@@ -410,6 +438,29 @@ app.get('/AddToArchive', (req,res) => {
     }
 })
 
+
+app.get('/RemoveFromArchive', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    let state = [`Update Movie set state = 1 where idMovie = ${req.query.idMovie}`]
+                    state = bd.request(state);
+
+                   
+                    res.redirect(`http://localhost:3001/MovieAdmin?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
+                    
+            
+                }
+
+        })
+    }
+})
+
 // Чтение сценария
 
 app.get('/ScenarioRead', (req,res) => {
@@ -605,15 +656,16 @@ app.get('/RequestsAdmin', (req,res) => {
     check.then(answer => {
         if (answer == false) {res.redirect('http://localhost:3001/log')}
             else {
-                state = ['SELECT * from Request'];
+                state = [`	Select Request.IdMovie, Request.IdWorker ,Request.IdRequest,  Movie.title, StudioWorker.name, FORMAT(Request.date, 'dd.MM.yyyy') AS 'date', Request.status from Movie
+                Join Request on Request.idMovie = Movie.IdMovie
+                Join StudioWorker  on StudioWorker.IdWorker = Request.IdWorker`];
 
 
                 let tables = bd.request(state);
 
 
                 tables.then(table => {
-                    console.log(table)
-                    res.render(__dirname + '/pages/AdminViews/RequestAdmin.ejs', {
+                    res.render(__dirname + '/pages/AdminViews/Request/RequestAdmin.ejs', {
                         table: table,
                         session: session
                     })
@@ -625,7 +677,31 @@ app.get('/RequestsAdmin', (req,res) => {
 })
 
 
+app.get('/AcceptRequest', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+    let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+            else {
+                console.log(req.query)
 
+                let state = [`exec CommitRequest ${req.query.idRequest}, ${req.query.idMovie}, ${req.query.idWorker}`];
+
+                state = bd.request(state);
+
+                let page = `/RequestsAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`
+
+                state.then(table => {
+                    res.redirect(page);
+                })
+            }
+
+        })
+    }
+})
 
 
 
@@ -644,15 +720,15 @@ app.get('/ArchiveAdmin', (req,res) => {
     check.then(answer => {
         if (answer == false) {res.redirect('http://localhost:3001/log')}
             else {
-                state = ['SELECT * from Movie Where state = 0'];
+                state = [`SELECT idMovie, title, length, genre, FORMAT(date, 'dd.MM.yyyy') AS 'release' FROM Movie where state = 0`];
 
 
-                let tables = bd.request(state);
+                state = bd.request(state);
 
                 
-                tables.then(table => {
+                state.then(table => {
                     console.log(table)
-                    res.render(__dirname + '/pages/AdminViews/ArchiveAdmin.ejs', {
+                    res.render(__dirname + '/pages/AdminViews/Archive/ArchiveAdmin.ejs', {
                         table: table,
                         session: session
                     })

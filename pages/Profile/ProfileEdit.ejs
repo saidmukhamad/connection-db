@@ -35,43 +35,47 @@
 
 
         <div style ="position: relative; left: 250px; top: 250px;">
-            <%console.log(table)%>
-        
-            <p>
-               Name: <input  type="text" name="name" value="<%= table[0][0].name %>">        
-            </p>
-            <p>
-                Surname <input  type="text" name="surname" value="<%= table[0][0].surname %>">
-            </p>
-            <p>
-                patronymic <input  type="text" name="patronymic" value="<%= table[0][0].patronymic %>"> 
-            </p>
+           
+        <form method="post">
+            <input type="hidden" name="idWorker" value="<%= table[0][0].idWorker %>">
+            <input type="hidden" name="login" value="<%= session[0] %>">
+            <input type="hidden" name="password" value="<%= session[1]%>">
+            <input type="hidden" name="state" value="<%= session[2] %>">
+            <input type="hidden" name="roleId" value="<%= session[3] %>">
 
-            <% let data = table[0][0].birthdate.split('.');  %> 
-                            
 
-            <p>
-              birthdate  <input type="date" style = "width: 180px; "name="birthdate" value = "<%=`${data[2]}-${data[1]}-${data[0]}`%>">
-            </p>
-            <p>
-                phone number <input type="phone" name="phone" value="<%= table[0][0].phone %>">
-            </p>
-
-            <p>
-               email <input type="email" name="name" value="<%= table[0][0].email %>">
-            </p>
-            <p>
-               login <input type="text" name="name" value="<%= table[0][0].login %>">
-            </p>
-            <p>
-               role: <input disabled style ="color: black;"type="text" name="name" value="<%= table[0][0].roleId %>"> 
-            </p>
-
-            <% let edit = `/ProfileEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`%> 
-
-            <a >change password</a>
-
-            <button type="submit" style = "color:black" onclick="window.location.href = '<%=edit%>' ">submit</button>
+             <p>Name: <input  type="text" name="name" value="<%= table[0][0].name %>"></p>
+             <p>Surname <input  type="text" name="surname" value="<%= table[0][0].surname %>"></p>
+             <p>patronymic <input  type="text" name="patronymic" value="<%= table[0][0].patronymic %>"> </p>
+ 
+             <% let data = table[0][0].birthdate.split('.');  %> 
+             <p>birthdate  <input type="date" style = "width: 180px; "name="birthdate" value = "<%=`${data[2]}-${data[1]}-${data[0]}`%>"></p>
+             
+             <p>phone number <input type="phone" name="phone" value="<%= table[0][0].phone %>"></p>
+ 
+             <p>
+                email <input type="email" name="email" value="<%= table[0][0].email %>">
+             </p>
+             <p>
+                login <input disabled style="color: black;" type="text" name="login" value="<%= table[0][0].login %>">
+             </p>
+             <p>
+                role: <% if (table[0][0].roleId == 1){ %>
+                    admin
+               <%  } else if(table[0][0].roleId == 2) { %>
+                    director
+               <% } else { %>
+                    actor
+                <% } %> 
+             </p>
+ 
+             <% let edit = `/ProfileEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`%> 
+ 
+             <a >change password</a>
+ 
+             <button type="submit" style = "color:black" onclick="window.location.href = '<%=edit%>' ">submit</button>
+            
+        </form>
            
         </div>
            

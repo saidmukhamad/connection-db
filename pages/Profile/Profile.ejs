@@ -80,7 +80,13 @@
                 <%= table[0][0].login %>
             </p>
             <p>
-                <%= table[0][0].roleId %>
+                <% if (table[0][0].roleId == 1){ %>
+                    admin
+               <%  } else if(table[0][0].roleId == 2) { %>
+                    director
+               <% } else { %>
+                    actor
+                <% } %> 
             </p>
 
             <% let edit = `/ProfileEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`%> 
