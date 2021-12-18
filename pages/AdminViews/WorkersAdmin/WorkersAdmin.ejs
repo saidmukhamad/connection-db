@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\AdminViews\WorkersAdmin\WorkersAdmin.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>WorkerS</h1> -->
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+
+        <div id = "location_nav">
+            <nav >
+                <% let data = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data%>'" >
+                Movies
+                </a>
+                
+                <% let data1 = `/ScenarioAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+                <a onclick = "window.location.href='<%= data1 %>'" >
+                    Scenarios
+                </a>
+                
+                <% let data3 = `/RequestsAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data3%>'" >
+                    Requests
+                </a>
+
+                
+                <% let data2 = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data2%>'" style = "color: black;" >
+                    Workers
+                </a>
+
+                <% let data4 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data4%>'" >
+                    Archive
+                </a>
+    
+                
+                <% let data5 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data5%>'" >
+                    Profile
+                </a>
+
+            </nav>             
+        </div >
+    
+
+            <% table.forEach(columns => { %>
+            
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Name</td>
+                            <td>Surname</td>
+                            <td>Phone</td>
+                            <td>State</td>
+                            
+                        </tr>
+                       
+                    </thead>
+                    <tbody>
+                        <% columns.forEach(function(column, index){ %>
+                            <% column = Object.values(column) %>
+                            <tr>
+                                <% if (column[4] != 1){ %>
+                                    <% let movie = `/WorkersMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${column[0]}` %> 
+ 
+                                     <td> <a id = "checkMovie" onclick="window.location.href='<%=movie%>'"><%= column[1]  %></a> </td>
+
+                                <% } else { %>
+                                    <td> <a id = ""><%= column[1]  %></a> </td>
+                                 <% } %> 
+                                <td><%= column[2]  %> </td>
+                                <td><%= column[3]  %> </td>
+                                <% if(column[4] == 1) { %>
+                                  <td>admin </td>
+                                <% } else if(column[4] == 2){ %>
+                                    <td>director</td>
+                                <% } else if (column[4] == 3) { %>
+                                    <td> actor </td>
+                                <% } %> 
+                                <% console.log(column[5]) %> 
+                                <% if (column[5] == 1) { %>
+                                    <td>active</td>
+                                    <% let deactivate = `/Deactivate?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${column[0]}` %> 
+                                    <td><button onclick="window.location.href='<%=deactivate%>'">deactivate</button></td>
+                                <% }  else if(column[5] == 0){ %>
+                                    <td>not active</td>
+                                    <% let activate = `/Activate?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${column[0]}` %> 
+
+                                    <td><button onclick="window.location.href='<%=activate%>'">activate</button></td>
+                               <% } %>
+                               <% let about = `/WorkersProfile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${column[0]}` %> 
+
+                                    <td><button onclick="window.location.href='<%= about%>'">about</button></td>
+                              
+                            </tr> 
+                        <% }); %>
+                        
+                            
+                      
+
+                    </tbody>
+                </table>    
+
+           <% }); %>
+
+           <% let data_ = `/MovieAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+            
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

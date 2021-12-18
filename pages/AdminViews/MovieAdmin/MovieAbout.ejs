@@ -45,9 +45,17 @@
                             <% let idScenario = table[1][0].idScenario; let read = `/ScenarioRead?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}&idScenario=${idScenario}` %> 
                             
                              <p>scenario <%= table[1][0].title%> <button style = "position: relative; top: -5px;" onclick  = "window.location.href='<%= read %>'">read</button></p>
+
+                             <% let CheckWorkers = `/MovieWorkers?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
+                             <p>Workers <button  style = "position: relative; top: -5px;" onclick = "window.location.href='<%=CheckWorkers%>'">watch</button></p>
                         <% } else { %>
                             <% let AddScenario = `/ScenarioToMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
                             <p>Scenario <button  style = "position: relative; top: -5px;" onclick = "window.location.href='<%=AddScenario%>'">add</button></p>
+                            
+                            
+                            
+                            <% let CheckWorkers = `/MovieWorkers?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
+                            <p>Workers <button  style = "position: relative; top: -5px;" onclick = "window.location.href='<%=CheckWorkers%>'">watch</button></p>
                         <% } %> 
                    
                    

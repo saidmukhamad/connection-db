@@ -524,15 +524,14 @@ app.get('/WorkersAdmin', (req,res) => {
     check.then(answer => {
         if (answer == false) {res.redirect('http://localhost:3001/log')}
             else {
-                state = ['SELECT IdWorker, name, surname, phone, roleId, state FROM StudioWorker'];
+                state = ['SELECT IdWorker, name, surname, phone, roleId, state FROM StudioWorker order by state DESC'];
 
 
                 let tables = bd.request(state);
 
 
                 tables.then(table => {
-                    console.log(table)
-                    res.render(__dirname + '/pages/AdminViews/WorkersAdmin.ejs', {
+                    res.render(__dirname + '/pages/AdminViews/WorkersAdmin/WorkersAdmin.ejs', {
                         table: table,
                         session: session
                     })
@@ -542,8 +541,250 @@ app.get('/WorkersAdmin', (req,res) => {
         })
     }
 })
-    
 
+
+app.get('/WorkersMovie', (req,res) => {
+
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+        state = [`Select StudioWorker.IdWorker, StudioWorker.name, Movie.title from StudioWorker
+        Join MovieWorker on MovieWorker.IdWorker = StudioWorker.IdWorker
+        Join Movie on MovieWorker.idMovie = Movie.IdMovie
+        Where (StudioWorker.IdWorker = ${req.query.idWorker}) and (Movie.state != 0)`];
+   
+        let tables = bd.request(state);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId, req.query.sort];
+
+        tables.then(table => {
+
+            res.render(__dirname + '/pages/AdminViews/WorkersAdmin/WorkerMovie', {
+                table: table,
+                session: session
+            })
+        })
+    })
+}
+})
+
+
+
+app.get('/MovieWorkers', (req,res) => {
+
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+        state = [`Select StudioWorker.IdWorker, StudioWorker.name, Movie.title from StudioWorker
+        Join MovieWorker on MovieWorker.IdWorker = StudioWorker.IdWorker
+        Join Movie on MovieWorker.idMovie = Movie.IdMovie
+        Where (Movie.IdMovie = ${req.query.idMovie}) and (Movie.state != 0)`];
+   
+        let tables = bd.request(state);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId, req.query.sort];
+
+        tables.then(table => {
+
+            res.render(__dirname + '/pages/AdminViews/MovieAdmin/MovieWorker', {
+                table: table,
+                session: session,
+                idMovie: req.query.idMovie 
+            })
+        })
+    })
+}
+})
+
+
+
+app.get('/WorkerToMovie', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    let state = ['Select idWorker, name, surname, phone from StudioWorker where state = 1 '];
+                    state = bd.request(state);
+                    state.then((table)=>{
+                        res.render(__dirname +'/pages/AdminViews/MovieAdmin/WorkerToMovie', {
+                            table: table,
+                            session: session,
+                            idMovie: req.query.idMovie
+                        })
+                    })
+                }
+
+        })
+    }
+})
+
+
+
+app.post('/WorkerToMovie', (req, res) => {
+    console.log(req.body)
+    if (req.body == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {               
+        let check = bd.checkConnection(req.body.login, req.body.password, req.body.roleId);
+        let session = [req.body.login, req.body.password, req.body.state, req.body.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    req.body.idWorker.forEach( idWork => {
+                        state = [`exec AddWorkerInMovie ${req.body.idMovie}, ${idWork}`];
+
+                        let tables = bd.request(state);
+    
+                    })
+                   
+                    
+                    res.redirect(`http://localhost:3001/MovieAbout?login=${req.body.login}&password=${req.body.password}&state=${req.body.status}&roleId=${req.body.roleId}&idMovie=${req.body.idMovie}`)
+                  
+                    
+                
+                }
+
+        })
+    }
+})
+
+
+
+app.get('/Deactivate', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    let state = [`Update StudioWorker set state = 0 where idWorker = ${req.query.idWorker}`]
+                    state = bd.request(state);
+
+                    state.then( ()=>{
+                        res.redirect(`http://localhost:3001/WorkersAdmin?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
+    
+                       })
+                }
+
+        })
+    }
+})
+
+
+app.get('/Activate', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    let state = [`Update StudioWorker set state = 1 where idWorker = ${req.query.idWorker}`]
+                    state = bd.request(state);
+
+                   state.then( ()=>{
+                    res.redirect(`http://localhost:3001/WorkersAdmin?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
+
+                   })
+                    
+            
+                }
+
+        })
+    }
+})
+
+
+app.get('/WorkersProfile', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    console.log(req.query)
+                    let state = [`Select idWorker, name, surname, patronymic, FORMAT(birthdate, 'dd.MM.yyyy') AS 'birthdate', phone, email, login, roleId from StudioWorker where idWorker = '${req.query.idWorker}'`];
+                    state = bd.request(state);
+
+                    state.then(table => {
+                        console.log(table)
+                        res.render(__dirname + '/pages/AdminViews/WorkersAdmin/WorkersProfile.ejs', {
+                            table: table,
+                            session: session
+                        })
+                    })
+                }
+
+        })
+    }
+})
+
+app.get('/WorkersEdit', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    console.log(req.query)
+                    let state = [`Select idWorker, name, surname, patronymic, FORMAT(birthdate, 'dd.MM.yyyy') AS 'birthdate', phone, email, login, roleId from StudioWorker where idWorker = '${req.query.idWorker}'`];
+                    state = bd.request(state);
+
+                    state.then(table => {
+                        console.log(table)
+                        res.render(__dirname + '/pages/AdminViews/WorkersAdmin/WorkersEdit.ejs', {
+                            table: table,
+                            session: session
+                        })
+                    })
+                }
+
+        })
+    }
+})
+
+app.post('/WorkersEdit', (req, res) => {
+    if (req.body == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {               
+        let check = bd.checkConnection(req.body.login, req.body.password, req.body.roleId);
+        let session = [req.body.login, req.body.password, req.body.state, req.body.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+
+                    console.log(req.body)
+                    state = [`Update StudioWorker set name = '${req.body.name}', surname= '${req.body.surname}', patronymic = '${req.body.patronymic}', phone = '${req.body.phone}',  birthdate = '${req.body.birthdate}', email = '${req.body.email}', roleId =${req.body.ROLEID} where idWorker = ${req.body.idWorker}`];
+                    console.log(state)
+                    let tables = bd.request(state);
+
+                    tables.then(() => {
+                        res.redirect(`http://localhost:3001/WorkersAdmin?login=${req.body.login}&password=${req.body.password}&state=${req.body.state}&roleId=${req.body.roleId}`)
+                    })
+                    
+                
+                }
+
+        })
+    }
+})
 
 
 // Просмотр всех сценариев (Для админа и режиссёра)

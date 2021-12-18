@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\AdminViews\WorkersAdmin\WorkersAdmin.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>MOVIEs</h1> -->
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+        <% let data_ = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+            
+            <a id = "arrow"  href="<%= data_ %>">
+                <img src=".\regPage\arrow.png">
+            </a>
+            <a id = "nearArrow">profile</a>
+
+
+  
+        <% let data5 = `/Profile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+
+            <% table.forEach(columns => { %>
+            
+                <table>
+                    <thead>
+                        <tr id = "hovertd">
+                            <% let transition = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&sort='Title'&idSort=${session[4]}`  %> 
+                            <td onclick = "window.location.href=''" id = "title">Name</td>
+                            <td id = "length">Title</td>
+                           
+                        </tr>
+                       
+                    </thead>
+                    <div id = #tablescroll>
+                    <tbody id = "margin_test">
+
+                            <% columns.forEach(function(column, index){ %>
+
+                                <% column = Object.values(column) %>
+    
+                                <tr>
+                                    <td id = "titleOfMovie"><%=column[1] %></td>
+                                    <td style = "text-align: center ;" id = "lengthOfMovie"><%=column[2] %></td>
+                                    
+                                </tr> 
+    
+    
+                            <% }); %>
+                        
+                       
+                        
+                            
+                      
+
+                    </tbody>
+                </div>
+                </table>    
+
+           <% }); %>
+
+           
+
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

@@ -3,6 +3,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
 
+html {
+    font-family: arvo;
+}
+
 
 #backForPage {
   background-color: #E5E5E5;
@@ -228,3 +232,26 @@ td  {
     overflow:auto;  
     margin-top:20px;
   }
+
+
+  #checkMovie:hover {
+    color: black;
+  }
+
+  
+  #arrow img{
+    width: 83px;
+    height: 74px;
+   max-height: 74px;
+   max-width: 83px;
+  
+   left: 5px;
+  
+}
+  
+#arrow {
+   position: absolute;
+   left: -2px;
+   top: 14px;
+  
+} 
