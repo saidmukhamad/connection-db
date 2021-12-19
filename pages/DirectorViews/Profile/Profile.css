@@ -7,11 +7,6 @@ html {
     font-size: 25px;
 }
 
-a {
-    font-family: Arvo;
-
-}
-
 #backForPage {
   background-color: #E5E5E5;
   background-color: #A7C2CA;
@@ -305,32 +300,4 @@ button {
 
     color: #000000;
 
-}
-
-
-.name {
-    height: 36px;
-    font-family: arvo;
-    padding:15px 0px 0px 0px;
-
-
-}
-
-.name div{
-    margin: 0;
-    padding:0px 0px 0px 40px;
-    display: inline-block;
-    list-style: none;
-    width:350px;
-    font-size: 24px;
-    text-align: right;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 22px;   
-}
-
-input {
-    text-align: right;
-    
 }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href="/Profile/Profile.css" rel="stylesheet" type="text/css">
+    <!-- C:\Users\saidm\Desktop\test\pages\Profile\Profile.ejs -->
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>MOVIEs</h1> -->
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+
+        <div id = "location_nav">
+            <nav >
+                <% console.log(session, 'Проверка сессии') %> 
+                <% let data = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data%>'" >
+                Movies
+                </a>
+                
+                
+                <% let data3 = `/RequestsAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data3%>'">
+                    Requests
+                </a>
+
+                
+                <% let data2 = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data2%>'" >
+                    Workers
+                </a>
+
+                
+                <% let data5 = `/Profile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data5%>'" style = "color: black;">
+                    Profile
+                </a>
+
+            </nav>             
+        </div >
+
+
+        <div style ="position: relative; left: 250px; top: 250px;">
+            <%console.log(table)%>
+        
+            <p>
+                <%= table[0][0].name %>
+            </p>
+            <p>
+                <%= table[0][0].surname %>
+            </p>
+            <p>
+                <%= table[0][0].patronymic %>
+            </p>
+            <p>
+                <%= table[0][0].birthdate%>
+            </p>
+            <p>
+                <%= table[0][0].phone %>
+            </p>
+
+            <p>
+                <%= table[0][0].email %>
+            </p>
+            <p>
+                <%= table[0][0].login %>
+            </p>
+            <p>
+                <% if (table[0][0].roleId == 1){ %>
+                    admin
+               <%  } else if(table[0][0].roleId == 2) { %>
+                    director
+               <% } else { %>
+                    actor
+                <% } %> 
+            </p>
+
+            <% let edit = `/ProfileEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`%> 
+
+            <a style = "color:black" onclick="window.location.href = '<%=edit%>' ">edit</a>
+           
+        </div>
+           
+
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

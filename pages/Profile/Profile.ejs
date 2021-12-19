@@ -17,6 +17,7 @@
 
         <div id = "location_nav">
             <nav >
+                <% console.log(session, 'Проверка сессии') %> 
                 <% let data = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
                 <a onclick = "window.location.href='<%=data%>'" >
                 Movies
@@ -45,7 +46,7 @@
                 </a>
     
                 
-                <% let data5 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <% let data5 = `/Profile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
                 <a onclick = "window.location.href='<%=data5%>'" style = "color: black;">
                     Profile
                 </a>
@@ -56,42 +57,99 @@
 
         <div style ="position: relative; left: 250px; top: 250px;">
             <%console.log(table)%>
+
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                     name
+                </div>
+                <div style="text-align: right;">
+                    <%= table[0][0].name %>
+                </div>
+
+                <div style="text-align: right; width: 100px;">
+                    <% let edit = `/ProfileEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`%> 
+
+                    <a style = "font-size: 24px;" onclick="window.location.href = '<%=edit%>' ">edit</a>        
+                </div>
+                
+            </div>
+
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    surname
+                </div>
+                <div style="text-align: right;">
+                    <%= table[0][0].surname %>
+                </div>
+            </div>
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    patronymic
+                </div>
+                <div style="text-align: right;">
+                    <%= table[0][0].patronymic %>
+                </div>
+            </div>
+
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    birthdate
+                </div>
+                <div style="text-align: right;">
+                    <%= table[0][0].birthdate %>
+                </div>
+            </div>
+
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    phone
+                </div>
+                <div style="text-align: right;">
+                    <%= table[0][0].phone %>
+                </div>
+            </div>
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    email
+                </div>
+                <div style="text-align: right;">
+                    <%= table[0][0].email %>
+                </div>
+            </div>
+            
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    login
+                </div>
+                <div style="text-align: right;">
+                    <%= table[0][0].login %>
+                </div>
+            </div>
+
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    role
+                </div>
+                <div style="text-align: right;">
+                    <% if (table[0][0].roleId == 1){ %>
+                        admin
+                   <%  } else if(table[0][0].roleId == 2) { %>
+                        director
+                   <% } else { %>
+                        actor
+                    <% } %> 
+                </div>
+            </div>
+         
+
         
-            <p>
-                <%= table[0][0].name %>
-            </p>
-            <p>
-                <%= table[0][0].surname %>
-            </p>
-            <p>
-                <%= table[0][0].patronymic %>
-            </p>
-            <p>
-                <%= table[0][0].birthdate%>
-            </p>
-            <p>
-                <%= table[0][0].phone %>
-            </p>
-
-            <p>
-                <%= table[0][0].email %>
-            </p>
-            <p>
-                <%= table[0][0].login %>
-            </p>
-            <p>
-                <% if (table[0][0].roleId == 1){ %>
-                    admin
-               <%  } else if(table[0][0].roleId == 2) { %>
-                    director
-               <% } else { %>
-                    actor
-                <% } %> 
-            </p>
-
-            <% let edit = `/ProfileEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`%> 
-
-            <a style = "color:black" onclick="window.location.href = '<%=edit%>' ">edit</a>
            
         </div>
            

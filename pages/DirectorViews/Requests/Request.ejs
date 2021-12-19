@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\DirectorViews\Request\Request.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>RequestS</h1> -->
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+
+        <div id = "location_nav">
+            <nav >
+                <% let data = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data%>'" >
+                Movies
+                </a>
+                
+                <% let data1 = `/ScenarioAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+                <a onclick = "window.location.href='<%= data1 %>'" >
+                    Scenarios
+                </a>
+                
+                <% let data3 = `/RequestsAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data3%>'" style = "color: black;">
+                    Requests
+                </a>
+
+                
+                <% let data2 = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data2%>'" >
+                    Workers
+                </a>
+
+                <% let data4 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data4%>'" >
+                    Archive
+                </a>
+    
+                
+                <% let data5 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data5%>'" >
+                    Profile
+                </a>
+
+            </nav>             
+        </div >
+    
+            <% if (table[0][0] == undefined) { %>
+                <h1>Запросов пока нет</h1>
+           <%} else { %>
+            <% table.forEach(columns => { %>
+            
+                <table>
+                    <thead>
+                        <tr>
+                            
+                                <td>title</td>
+                                <td>name</td>
+                                <td>date</td>
+                                <td>status</td>
+                            
+                            
+                        </tr>
+                       
+                    </thead>
+                    <tbody>
+                        <% columns.forEach(function(column, index){ %>
+                            <% column = Object.values(column) %>
+                            <tr>
+
+                                    <td> <%=column[3]%> </td>
+                                    <td> <%=column[4]%> </td>
+                                    <td> <%=column[5]%> </td>
+                                    <td> <%=column[6]%> </td>
+                                    <% if(column[6] == false) { %>
+                                        <% let accept = `/AcceptRequest?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idRequest=${column[2]}&idMovie=${column[0]}&idWorker=${column[1]}` %> 
+                                                                                                                                                                
+                                        <td><button onclick="window.location.href='<%=accept%>'">accept</button></td>
+                                   <% } %> 
+
+                            </tr> 
+                        <% }); %>
+                        
+                            
+
+                    </tbody>
+                </table>    
+
+           <% }); %>
+           <% } %>
+            
+
+           <% let data_ = `/MovieAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+        
+
+
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

@@ -70,6 +70,7 @@ var checkConnection = exports.checkConnection = (login, password, roleId) => {
     var checkRequest = [`Select * from StudioWorker where (login = '${login}') and (password = '${password}') and (state = 'true') and (roleId = '${roleId}')`]
     let check = request(checkRequest)
     check.then((answer) => {
+      console.log(answer, 'check')
      if (answer[0][0] == undefined) {
          resolve(false);
        } else {
