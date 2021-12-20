@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\DirectorViews\Movie\MovieDirector.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>MOVIEs</h1> -->
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+        <% if (table[0] == undefined) { %>
+            <h1>No films to create request</h1>
+        <% } else { %>
+            <% table.forEach(columns => { %>
+                <% console.log(table) %> 
+              
+                <table>
+                    <thead>
+                        <tr id = "hovertd">
+                            <td id = "title">Title</td>
+                        
+
+
+                          
+                            
+                        </tr>
+                       
+                    </thead>
+                    <div id = #tablescroll>
+                    <tbody id = "margin_test">
+
+                           <% columns.forEach(column => { %>
+                            <tr>
+                                <% console.log(column) %> 
+                                <form method = "post">
+                                    <input type="hidden" name="idMovie" value="<%= column.IdMovie %>">
+                                    <input type="hidden" name="idWorker" value="<%= column.idWorker %>">
+
+                                    
+
+                                    <input type="hidden" name="login" value="<%= session[0] %>">
+                                    <input type="hidden" name="password" value="<%= session[1]%>">
+                                    <input type="hidden" name="status" value="<%= session[2] %>">
+                                    <input type="hidden" name="roleId" value="<%= session[3] %>">
+                                
+                                <td id = "titleOfMovie"><%=column.title %></td>
+                                
+                                <td id = "addMovie"><button type="submit">request</button></td>
+                            </form>
+                            </tr> 
+                            <% }) %> 
+
+    
+    
+                         
+                        
+                       
+                        
+                            
+                      
+
+                    </tbody>
+                </div>
+                </table>    
+
+
+          
+
+           <% }); %>
+
+           <% } %>
+
+           
+
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

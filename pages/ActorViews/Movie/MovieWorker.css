@@ -2,15 +2,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
+
 html {
-    font-family: Arvo;
-    font-size: 25px;
+    font-family: arvo;
 }
 
-a {
-    font-family: Arvo;
-
-}
 
 #backForPage {
   background-color: #E5E5E5;
@@ -50,7 +46,7 @@ a {
 
 #location_nav {
     position: absolute;
-    left: 261px;
+    left: 78px;
     top: 80.15px;
     width: 1252.32px;
     height: 39.42px;
@@ -81,23 +77,18 @@ a {
     color: #FFFFFF;
 }
 
-.PositionColor tbody {
+.Position {
     position: relative;
-    top: 315px;
+    left: 230px;
+    top: 150px;
+    overflow-y:scroll;
     scroll-behavior: smooth;
  
 
 }
 
-#hovertd td:hover {
-  color:black;
 
-}
 
-#hovertd td{
-    padding: 0px 0px 0px 0px;
-
-}
 #title{
     position: absolute;
     width: 71.58px;
@@ -159,8 +150,16 @@ a {
 }
 
 td  {
-    top: -60px;
-    padding: 40px 0px 0px 0px;
+    position: relative;
+    top: -40px;
+    padding: 40px 40px 0px 0px;
+    left: 50px;
+
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
     
 
 }
@@ -238,6 +237,11 @@ td  {
   }
 
 
+  #checkMovie:hover {
+    color: black;
+  }
+
+  
   #arrow img{
     width: 83px;
     height: 74px;
@@ -250,87 +254,36 @@ td  {
   
 #arrow {
    position: absolute;
-   left: -2px;
+   left: 2px;
    top: 14px;
   
 } 
-  
+
 #nearArrow {
-
-    position: relative;
-    width: 54px;
-    height: 22px;
-    left: 76px;
-    top: 29px;
-
-    font-family: 'Arvo';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-
+    position: absolute;
+    left: 50px;
+    top: 40px;
 }
 
-input {
-    border: 0;
-    outline: 0;
-    width: 350px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
-    font-family: 'Arvo';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-}
 
 
 button {
-    
-    width: 105px;
-    height: 31px;
-   
-    
-    background: #FFFFFF;
-    border-radius: 3px;
+    width: 121.94px;
+    height: 43.3px;
 
-    border: 0;
-    outline: 0;
-    
+    margin-right: 20px;
+
+    background: #C4C4C4;
+    border-radius: 3px;
+    border: none;
+
     
     font-family: Arvo;
     font-style: normal;
     font-weight: bold;
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 18px;
+    line-height: 22px;
 
     color: #000000;
-
 }
 
-
-.name {
-    height: 36px;
-    font-family: arvo;
-    padding:15px 0px 0px 0px;
-
-
-}
-
-.name div{
-    margin: 0;
-    padding:0px 0px 0px 40px;
-    display: inline-block;
-    list-style: none;
-    width:350px;
-    font-size: 24px;
-    text-align: right;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 22px;   
-}
-
-input {
-    text-align: right;
-    
-}

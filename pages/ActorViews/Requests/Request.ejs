@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\ActorViews\Requests\Request.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>RequestS</h1> -->
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+
+        <div id = "location_nav">
+            <nav >
+                <% console.log(session, 'Проверка сессии') %> 
+                <% let data = `/MovieActor?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data%>'" >
+                Movies
+                </a>
+                
+                
+                <% let data3 = `/RequestsActor?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data3%>'"  style = "color: black;">
+                    Requests
+                </a>
+
+                
+                <% let data2 = `/WorkersActor?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data2%>'" >
+                    Workers
+                </a>
+
+    
+                
+                <% let data5 = `/ActorProfile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data5%>'">
+                    Profile
+                </a>
+
+            </nav>             
+        </div >
+
+    
+            <% if (table[0][0] == undefined) { %>
+                <h1 style="position: absolute; top: 220px; left: 550px; font-size: 36px;">No Requests</h1>
+                <% let createRequest = `/CreateRequest?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}` %> 
+                <h1  onclick="window.location.href = '<%=createRequest%>'" id = "status" style="position:absolute; left: 1100px;"> NEW REQUEST</h1>
+           <%} else { %>
+            <% table.forEach(columns => { %>
+
+              
+                <table>
+                    <thead>
+                        <tr >
+                            <% console.log(table) %> 
+                            
+                                <td id="actor">Actor</td>
+                                <td id="movie">Movie</td>
+                                <td style="position: absolute; left: 870px" id = "status">Status</td>
+                                <% let createRequest = `/CreateRequest?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}` %> 
+                                <td  onclick="window.location.href = '<%=createRequest%>'" id = "status" style="position:absolute; left: 1100px;"> NEW</td>
+
+                            
+                        </tr>
+                       
+                    </thead>
+                    <tbody>
+                        <% columns.forEach(function(column, index){ %>
+                            <% column = Object.values(column) %>
+                            <tr id = "font">
+                                    <%console.log(column)%>
+                                    <td id="actor_"> <%=column[2]%> </td>
+                                    <td id="movie_"> <%=column[3]%> </td>
+                                    <td id = "status_"> <%=column[4]%> </td>
+                                 
+                            </tr> 
+                        <% }); %>
+                        
+                            
+
+                    </tbody>
+                </table>    
+
+           <% }); %>
+           <% } %>
+            
+
+           <% let data_ = `/MovieAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+        
+
+
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

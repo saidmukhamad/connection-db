@@ -22,7 +22,7 @@
         </a>
         <a id = "nearArrow">about</a>
 
-        <% let id = table[0][0].idMovie; let edit = `/MovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}` %> 
+        <% let id = table[0][0].idMovie; let edit = `/DirectorMovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}` %> 
         <a id = "look" onclick="window.location.href = '<%= edit %>'"> Edit </a>
 
 
@@ -81,16 +81,7 @@
                             
 
                              
-                            <% let archive = `/AddToArchive?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}` %> 
 
-                            <div class = 'name'>
-                                <div style="text-align: left;">
-                                    push to archive
-                                </div>
-                                <div style="text-align: right;">
-                                    <a onclick="window.location.href = '<%= archive %>'">archive</a>
-                                </div>
-                            </div>
                             
                             
                                 <% if(table[1][0] != undefined) { %>
@@ -98,7 +89,7 @@
                                         <% let idScenario = table[1][0].IdScenario; %>
                                         <% console.log(idScenario) %>
                                         <% let deleteScenario = `/DeleteScenarioFromMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}&idScenario=${idScenario}` %> 
-                                        <% let read = `/ScenarioRead?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}&idScenario=${idScenario}` %> 
+                                        <% let read = `/DirectorScenarioRead?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}&idScenario=${idScenario}` %> 
 
                                         <div class = 'name'>
                                             <div style="text-align: left;">
@@ -106,14 +97,13 @@
                                             </div>
                                             <div style="text-align: right;">
                                                 <a style = "position: relative; top: -5px;" onclick  = "window.location.href='<%= read %>'">read</a>
-                                                <a  style = "position: relative; top: -5px; margin-left: 22px;" onclick = "window.location.href='<%=deleteScenario %>'">delete</a>
                                             </div>
                                         </div>
                                         
                         
                                 <% } else { %>
 
-                                    <% let AddScenario = `/ScenarioToMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
+                                    <% let AddScenario = `/DirectorScenarioToMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
 
 
                                     <div class = 'name'>

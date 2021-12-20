@@ -2,15 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
-html {
-    font-family: Arvo;
-    font-size: 25px;
-}
 
-a {
-    font-family: Arvo;
-
-}
 
 #backForPage {
   background-color: #E5E5E5;
@@ -55,6 +47,7 @@ a {
     width: 1252.32px;
     height: 39.42px;
 }
+
 
 #location_nav a {
     font-family: Arvo;
@@ -159,7 +152,7 @@ a {
 }
 
 td  {
-    top: -60px;
+    top: 0px;
     padding: 40px 0px 0px 0px;
     
 
@@ -169,49 +162,7 @@ td  {
 
 
 
-#titleOfMovie {
-    position: relative;
-    left: 74.68px;
-    text-align: center;
-
-    font-family: Arvo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-
-    color: #FFFFFF;
-    
-}
-
-
-#lengthOfMovie {
-    position: relative;
-    left: 270.68px;
-    margin: 20px;
-}
-
-#genreOfMovie {
-    position: relative;
-    left: 492px;
-    text-align: center;
-
-}
-
-#dateOfMovie {
-    position: relative;
-    left: 588.79px;
-    
-
-}
-
-#addMovie {
-    position: relative;
-    left: 657px;
-
-}
-
-#addMovie button{
+button {
     width: 121.94px;
     height: 43.3px;
 
@@ -231,6 +182,7 @@ td  {
 }
 
 
+
 #table-scroll {
     height:150px;
     overflow:auto;  
@@ -238,99 +190,102 @@ td  {
   }
 
 
-  #arrow img{
-    width: 83px;
-    height: 74px;
-   max-height: 74px;
-   max-width: 83px;
-  
-   left: 5px;
-  
-}
-  
-#arrow {
-   position: absolute;
-   left: -2px;
-   top: 14px;
-  
-} 
-  
-#nearArrow {
-
+#accept {
     position: relative;
-    width: 54px;
-    height: 22px;
-    left: 76px;
-    top: 29px;
+    /* left: 600px; */
+    left: 450px;
+    top: -65.58px;
 
-    font-family: 'Arvo';
+}
+  
+
+#actor {
+    position: absolute;
+    width: 71.58px;
+    height: 39.42px;
+    left: 294.68px;
+    top: 170.58px;
+}
+
+#movie {
+    position: absolute;
+    width: 71.58px;
+    height: 39.42px;
+    left: 578.68px;
+    top: 170.58px;
+}
+
+#date {
+    position: absolute;
+    width: 48px;
+    height: 30px;
+    left: 827px;
+    top: 170.58px;
+    
+}
+
+#status {
+    position: absolute;
+    width: 48px;
+    height: 30px;
+    left: 970px;
+    top: 170.58px;
+}
+
+
+
+#actor_ {
+    position: relative;
+    text-align: center;
+    width: 180.58px;
+    height: 39.42px;
+    left: 234.68px;
+    top: -65.58px;
+
+
+   font-family: Arvo;
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
     line-height: 22px;
-
 }
 
-input {
-    border: 0;
-    outline: 0;
-    width: 350px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
-    font-family: 'Arvo';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
+#movie_ {
+    position: relative;
+    width: 171.58px;
+    height: 39.42px;
+    left: 350.68px;
+    top: -65.58px;
 }
 
+#date_ {
+    position: relative;
+    width: 48px;
+    height: 30px;
+    left: 450px;
+    top: -65.58px;
+    
+}
 
-button {
-    
-    width: 105px;
-    height: 31px;
-   
-    
-    background: #FFFFFF;
-    border-radius: 3px;
+#status_ {
+    position: relative;
+    width: 48px;
+    height: 30px;
+    left: 530px;
+    top: -65.58px;
+}
 
-    border: 0;
-    outline: 0;
-    
-    
+#addScenario:hover {
+    color: black;
+}
+
+#font {
     font-family: Arvo;
     font-style: normal;
     font-weight: bold;
-    font-size: 12px;
-    line-height: 15px;
+    font-size: 18px;
+    line-height: 22px;
 
-    color: #000000;
-
+    text-align: center;
 }
 
-
-.name {
-    height: 36px;
-    font-family: arvo;
-    padding:15px 0px 0px 0px;
-
-
-}
-
-.name div{
-    margin: 0;
-    padding:0px 0px 0px 40px;
-    display: inline-block;
-    list-style: none;
-    width:350px;
-    font-size: 24px;
-    text-align: right;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 22px;   
-}
-
-input {
-    text-align: right;
-    
-}

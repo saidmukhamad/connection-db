@@ -2,15 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
-html {
-    font-family: Arvo;
-    font-size: 25px;
-}
 
-a {
-    font-family: Arvo;
-
-}
 
 #backForPage {
   background-color: #E5E5E5;
@@ -124,7 +116,7 @@ a {
     position: absolute;
     width: 89.77px;
     height: 39.42px;
-    left: 808.26px;
+    left: 738.26px;
     top: 200.58px;
 }
 
@@ -132,7 +124,7 @@ a {
     position: absolute;
     width: 66.72px;
     height: 39.42px;
-    left: 1004.79px;
+    left: 946.79px;
     top: 200.58px;
 }   
 
@@ -171,7 +163,7 @@ td  {
 
 #titleOfMovie {
     position: relative;
-    left: 74.68px;
+    left: 112.68px;
     text-align: center;
 
     font-family: Arvo;
@@ -187,13 +179,13 @@ td  {
 
 #lengthOfMovie {
     position: relative;
-    left: 270.68px;
+    left: 340.68px;
     margin: 20px;
 }
 
 #genreOfMovie {
     position: relative;
-    left: 492px;
+    left: 482px;
     text-align: center;
 
 }
@@ -236,101 +228,3 @@ td  {
     overflow:auto;  
     margin-top:20px;
   }
-
-
-  #arrow img{
-    width: 83px;
-    height: 74px;
-   max-height: 74px;
-   max-width: 83px;
-  
-   left: 5px;
-  
-}
-  
-#arrow {
-   position: absolute;
-   left: -2px;
-   top: 14px;
-  
-} 
-  
-#nearArrow {
-
-    position: relative;
-    width: 54px;
-    height: 22px;
-    left: 76px;
-    top: 29px;
-
-    font-family: 'Arvo';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-
-}
-
-input {
-    border: 0;
-    outline: 0;
-    width: 350px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
-    font-family: 'Arvo';
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-}
-
-
-button {
-    
-    width: 105px;
-    height: 31px;
-   
-    
-    background: #FFFFFF;
-    border-radius: 3px;
-
-    border: 0;
-    outline: 0;
-    
-    
-    font-family: Arvo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 15px;
-
-    color: #000000;
-
-}
-
-
-.name {
-    height: 36px;
-    font-family: arvo;
-    padding:15px 0px 0px 0px;
-
-
-}
-
-.name div{
-    margin: 0;
-    padding:0px 0px 0px 40px;
-    display: inline-block;
-    list-style: none;
-    width:350px;
-    font-size: 24px;
-    text-align: right;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 22px;   
-}
-
-input {
-    text-align: right;
-    
-}

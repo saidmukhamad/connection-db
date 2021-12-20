@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\DirectorViews\Workers\WorkersAdmin.css" rel="stylesheet" type="text/css">
+
+    <style>
+         select option:focus {
+            border:0px;
+            outline:0px;
+            -webkit-appearance: none;
+            outline: none !important;
+        }
+
+        select  {
+            border:0px;
+            outline:0px;
+            -webkit-appearance: none;
+            outline: none !important;
+
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
+            color:white;
+
+            font-family: Arvo;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 22px;
+            line-height: 30px;
+
+        }
+    </style>
+
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>WorkerS</h1> -->
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+        <div id = "location_nav">
+            <nav >
+                <% console.log(session, 'Проверка сессии') %> 
+                <% let data = `/MovieActor?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data%>'" >
+                Movies
+                </a>
+                
+                
+                <% let data3 = `/RequestsActor?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data3%>'">
+                    Requests
+                </a>
+
+                
+                <% let data2 = `/WorkersActor?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data2%>'"  style = "color: black;" >
+                    Workers
+                </a>
+
+    
+                
+                <% let data5 = `/ActorProfile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data5%>'">
+                    Profile
+                </a>
+
+            </nav>             
+        </div >
+    
+
+            <% table.forEach(columns => { %>
+            
+                <table class="Position">
+                    <thead>
+                        <tr>
+                            <td id = "position" >Name</td>
+                            <td id = "position" >Surname</td>
+                            <td id = "position" >Phone</td>
+                            <td id = "position" >
+                                <form method="post">
+                                    <select name="roleId" onchange="this.form.submit()">
+                                        <option disabled selected value> Role </option>
+                                        <option  value="1">Admin</option>
+                                        <option  value="2">Director</option>
+                                        <option  value="3">Actor</option>
+
+                                        <input type="hidden" name="login" value="<%= session[0] %>">
+                                        <input type="hidden" name="password" value="<%= session[1]%>">
+                                        <input type="hidden" name="state" value="<%= session[2] %>">
+                                        <input type="hidden" name="roleId" value="<%= session[3] %>">
+
+                                        
+                                    </select>
+                                </form>
+                            
+                            
+                            </td>
+                            
+                        </tr>
+                       
+                    </thead>
+                    <tbody>
+                        <% columns.forEach(function(column, index){ %>
+                            <% column = Object.values(column) %>
+                            <tr>
+                                <% if (column[4] != 1){ %>
+                                    <% let movie = `/WorkersMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${column[0]}` %> 
+ 
+                                     <td> <a id = "checkMovie" onclick="window.location.href='<%=movie%>'"><%= column[1]  %></a> </td>
+
+                                <% } else { %>
+                                    <td> <a id = ""><%= column[1]  %></a> </td>
+                                 <% } %> 
+                                <td><%= column[2]  %> </td>
+                                <td><%= column[3]  %> </td>
+                                <% if(column[4] == 1) { %>
+                                  <td>admin </td>
+                                <% } else if(column[4] == 2){ %>
+                                    <td>director</td>
+                                <% } else if (column[4] == 3) { %>
+                                    <td> actor </td>
+                                <% } %> 
+                                <% console.log(column[5]) %> 
+                                <% if (column[5] == 1) { %>
+                                 
+                                <% }  else if(column[5] == 0){ %>
+                                   
+                               <% } %>
+                               <% let about = `/DirectorWorkersProfile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${column[0]}` %> 
+
+                                    <td><button onclick="window.location.href='<%= about%>'">about</button></td>
+                              
+                            </tr> 
+                        <% }); %>
+                        
+                            
+                      
+
+                    </tbody>
+                </table>    
+
+           <% }); %>
+
+           <% let data_ = `/MovieAdd?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+            
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

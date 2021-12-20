@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\AdminViews\MovieAdmin\MovieAbout.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>WorkerS</h1> -->
+    <% let data_ = `/MovieActor?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+  
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+        
+        <a id = "arrow"  href="<%= data_ %>">
+            <img src=".\regPage\arrow.png">
+        </a>
+        <a id = "nearArrow">about</a>
+
+        <a id = "look" > Look </a>
+
+            <div class = "about">
+                 
+                <% let id =table[0][0].idMovie %>
+                    
+                    <div id = "information">
+
+                        <div class = 'name'>
+                            <div style="text-align: left; width: 120px;">
+                                Title
+                            </div>
+                            <div style="text-align: right; width: 387px;">
+                                <%= table[0][0].title %>
+                            </div>
+                        </div>
+
+                        <div class = 'name'>
+                            <div style="text-align: left;">
+                                length
+                            </div>
+                            <div style="text-align: right;">
+                                <%= table[0][0].length %>
+                            </div>
+                        </div>
+
+                        <div class = 'name'>
+                            <div style="text-align: left;">
+                                genre
+                            </div>
+                            <div style="text-align: right;">
+                                <%= table[0][0].genre %>
+                            </div>
+                        </div>
+
+                        <div class = 'name'>
+                            <div style="text-align: left;">
+                                release
+                            </div>
+                            <div style="text-align: right;">
+                                <%= table[0][0].release %>
+                            </div>
+                        </div>
+                            <div>
+
+                         <% if (table[2][0] != undefined) { %>
+                               <div class = 'name'>
+                            <div style="text-align: left; width: 150px;">
+                                director
+                            </div>
+                            <div style="text-align: left; width: 370px; padding-right: 5px;">
+                                <%=table[2][0].name%> <%= table[2][0].surname %> 
+                            </div>
+                         <%  } %>        
+                            </div>
+                      
+                        
+
+
+                        <% if(table[1][0] != undefined) { %>
+                            <% let check = table[1][0].IdScenario; %>
+                            <%console.log('table', table)%>
+                            <% console.log('Проверка',check,'checker')%>
+
+                            <% let idScenario = table[1][0].IdScenario; let read = `/DirectorScenarioRead?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}&idScenario=${idScenario}` %> 
+                            
+
+                             <% let CheckWorkers = `/DirectorMovieWorkers?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
+                             <div class = 'name'>
+                                <div style="text-align: left; width: 120px;">
+                                    scenario
+                                </div>
+                                <div style="text-align: left; width: 400px;">
+                                    <%= table[1][0].title%>   <button style = "position: relative; " onclick  = "window.location.href='<%= read %>'">read</button>       
+                                </div>
+                              
+                             </div>
+                             
+                             <div class = 'name'>
+                                <div style="text-align: left;">
+                                    actors
+                                </div>
+                                <div style="text-align: right;">
+                                    <button  style = "position: relative; " onclick = "window.location.href='<%=CheckWorkers%>'">watch</button>
+                                </div>
+                            </div>
+                            
+                            
+
+                       
+                       
+                       
+                       <% } %> 
+                   
+                   
+
+            
+
+                   
+
+            </div>    
+
+ 
+
+            
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>
+
+
+
+

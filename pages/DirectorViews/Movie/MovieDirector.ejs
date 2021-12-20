@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\DirectorViews\Movie\MovieDirector.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>MOVIEs</h1> -->
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+
+        <div id = "location_nav">
+            <nav >
+                <% console.log(session, 'Проверка сессии') %> 
+                <% let data = `/MovieDirector?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data%>'" style = "color: black;" >
+                Movies
+                </a>
+                
+                
+                <% let data3 = `/RequestsDirector?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data3%>'">
+                    Requests
+                </a>
+
+                
+                <% let data2 = `/WorkersDirector?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data2%>'" >
+                    Workers
+                </a>
+
+    
+                
+                <% let data5 = `/DirectorProfile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <a onclick = "window.location.href='<%=data5%>'" >
+                    Profile
+                </a>
+
+            </nav>             
+        </div >
+    
+
+            <% table.forEach(columns => { %>
+            
+                <table>
+                    <thead>
+                        <tr id = "hovertd">
+                            <td id = "title">Title</td>
+                            <td id = "length">Length</td>
+                            <td id = "genre">genre</td>
+                            <td id = "date">date</td>
+
+
+                          
+                            
+                        </tr>
+                       
+                    </thead>
+                    <div id = #tablescroll>
+                    <tbody id = "margin_test">
+
+                            <% columns.forEach(function(column, index){ %>
+
+                                <% column = Object.values(column) %>
+                                <% let transmission = `/DirectorMovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${column[0]}`%> 
+    
+                                <tr>
+                                    <td id = "titleOfMovie"><%=column[1] %></td>
+                                    <td style = "text-align: center ;" id = "lengthOfMovie"><%=column[2] %></td>
+                                    <td id = "genreOfMovie"><%=column[3] %></td>
+                                    <td id = "dateOfMovie"><%=column[4] %></td>
+                                    <td id = "addMovie"><button><a onclick = "window.location.href='<%= transmission %>'">about</a></button></td>
+                                </tr> 
+    
+    
+                            <% }); %>
+                        
+                       
+                        
+                            
+                      
+
+                    </tbody>
+                </div>
+                </table>    
+
+           <% }); %>
+
+           
+
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

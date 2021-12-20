@@ -4,7 +4,7 @@
 
 <head>
 
-    <link href="/DirectorViews/Profile/Profile.css" rel="stylesheet" type="text/css">
+    <link href=".\AdminViews\WorkersAdmin\WorkersProfile.css" rel="stylesheet" type="text/css">
     <!-- C:\Users\saidm\Desktop\test\pages\Profile\Profile.ejs -->
 
 </head>
@@ -15,35 +15,15 @@
 
     <div class="PositionColor" style = "margin-top: 25px;">
 
-        <div id = "location_nav">
-            <nav >
-                <% console.log(session, 'Проверка сессии') %> 
-                <% let data = `/MovieDirector?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data%>'" >
-                Movies
-                </a>
-                
-                
-                <% let data3 = `/RequestsDirector?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data3%>'">
-                    Requests
-                </a>
+        <% let data_ = `/WorkersDirector?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
 
-                
-                <% let data2 = `/WorkersDirector?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data2%>'" >
-                    Workers
-                </a>
+            
+        <a id = "arrow"  href="<%= data_ %>">
+            <img src=".\regPage\arrow.png">
+        </a>
+        <a id = "nearArrow">workers</a>
 
-    
-                
-                <% let data5 = `/DirectorProfile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
-                <a onclick = "window.location.href='<%=data5%>'" style = "color: black;">
-                    Profile
-                </a>
-
-            </nav>             
-        </div >
+       
 
 
         <div style ="position: relative; left: 250px; top: 250px;">
@@ -58,11 +38,7 @@
                     <%= table[0][0].name %>
                 </div>
 
-                <div style="text-align: right; width: 100px;">
-                    <% let edit = `/DirectorProfileEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`%> 
-
-                    <a style = "font-size: 24px;" onclick="window.location.href = '<%=edit%>' ">edit</a>        
-                </div>
+              
                 
             </div>
 
@@ -123,7 +99,7 @@
                 </div>
             </div>
 
-
+            <% id = table[0][0].idWorker %> 
             <div class = 'name'>
                 <div style="text-align: left;">
                     role
@@ -133,19 +109,30 @@
                         admin
                    <%  } else if(table[0][0].roleId == 2) { %>
                         director
+                        <%  let watchMovie = `/WorkersMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${id}` %> 
+                        <button onclick="window.location.href = '<%=watchMovie%>' ">Movies</button>
+
                    <% } else { %>
                         actor
+                        <% let watchMovie = `/WorkersMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${id}` %> 
+
+                        <button onclick="window.location.href = '<%=watchMovie%>' ">Movies</button>
+
                     <% } %> 
                 </div>
+
             </div>
          
 
         
            
+    
+
+           
+           
         </div>
            
 
-        </div>
     
             
         

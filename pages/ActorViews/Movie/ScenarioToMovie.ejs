@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\AdminViews\ScenarioAdmin\ScenarioToMovie.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <!-- <h1>ScnearioS</h1> -->
+
+    <div class="PositionColor" style = "margin-top: 25px;">
+
+    
+        <% let data = `/MovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${idMovie}`  %>
+   
+        <a id = "arrow"  href="<%= data %>">
+            <img src=".\regPage\arrow.png">
+        </a>
+        
+        <% table.forEach(columns => { %>
+            
+            <table id = 'test'>
+                <thead>
+                    <tr id = "hovertd">
+                        <td id = "TitleScenario">Title</td>
+                        <td id = "AuthorScenario">Author</td>
+
+                        <td id = "addScenario"><a onclick = "window.location.href ='<%%>'"> <input type="hidden">  </a> </td>
+                        
+                    </tr>
+                   
+                </thead>
+                <tbody id = "font">
+                    <% columns.forEach(function(column, index){ %>
+                        <% column = Object.values(column) %>
+                        <tr>
+                                <% console.log(column) %> 
+                                <td id ="titleOfScenario"><%= column[1] %> </td>
+                                <td id = "authorOfScenario"><%= column[2] %></td>
+                                <td id = "aboutScenario">
+                                    <form method = "post">
+                                        <input type="hidden" name="idScenario" value="<%=column[0]%>">
+                                        <input type="hidden" name="idMovie" value="<%= idMovie %>">
+                                             
+                                        <input type="hidden" name="login" value="<%= session[0] %>">
+                                        <input type="hidden" name="password" value="<%= session[1]%>">
+                                        <input type="hidden" name="status" value="<%= session[2] %>">
+                                        <input type="hidden" name="roleId" value="<%= session[3] %>">
+                                        <button type = "submit">add</button>
+                                    </form>
+                                </td>
+                        </tr> 
+                    <% }); %>
+                    
+                        
+                  
+
+                </tbody>
+            </table>    
+
+       <% }); %>
+
+
+
+               
+
+
+        </div>
+    
+            
+        
+       
+
+     
+    </div>
+
+</body>
+</html>

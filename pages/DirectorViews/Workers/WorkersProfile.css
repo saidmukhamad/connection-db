@@ -7,6 +7,326 @@ html {
     font-size: 25px;
 }
 
+#backForPage {
+  background-color: #E5E5E5;
+  background-color: #A7C2CA;
+
+}
+
+.PositionColor {
+
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow-y:scroll;
+ 
+ 
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
+  border: none;
+  outline: none;
+  padding: 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+
+  color: #FFFFFF;
+
+
+  min-width: 1366px;
+  min-height: 900px;
+  max-width: 1366px;
+  max-height: 900px;
+
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#location_nav {
+    position: absolute;
+    left: 78px;
+    top: 80.15px;
+    width: 1252.32px;
+    height: 39.42px;
+}
+
+#location_nav a {
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    margin: 50px;
+}
+
+
+#location_nav a:hover {
+    color: black;
+}
+
+
+.PositionColor thead {
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+
+    color: #FFFFFF;
+}
+
+.PositionColor tbody {
+    position: relative;
+    top: 315px;
+    scroll-behavior: smooth;
+ 
+
+}
+
+#hovertd td:hover {
+  color:black;
+
+}
+
+#hovertd td{
+    padding: 0px 0px 0px 0px;
+
+}
+#title{
+    position: absolute;
+    width: 71.58px;
+    height: 39.42px;
+    left: 176.68px;
+    top: 200.58px;
+    
+
+
+}
+
+#length{
+    
+    position: absolute;
+    width: 98.26px;
+    height: 39.42px;
+    left: 508.68px;
+    top: 200.58px;
+
+}
+
+
+#genre {
+    position: absolute;
+    width: 89.77px;
+    height: 39.42px;
+    left: 808.26px;
+    top: 200.58px;
+}
+
+#date {
+    position: absolute;
+    width: 66.72px;
+    height: 39.42px;
+    left: 1004.79px;
+    top: 200.58px;
+}   
+
+
+#add {
+    position: absolute;
+    width: 36px;
+    height: 22px;
+    left: 1190px;
+    top: 200.58px;
+
+}
+
+#margin_test {
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #FFFFFF;
+    position: relative;
+
+}
+
+td  {
+    top: -60px;
+    padding: 40px 0px 0px 0px;
+    
+
+}
+
+
+
+
+
+#titleOfMovie {
+    position: relative;
+    left: 74.68px;
+    text-align: center;
+
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #FFFFFF;
+    
+}
+
+
+#lengthOfMovie {
+    position: relative;
+    left: 270.68px;
+    margin: 20px;
+}
+
+#genreOfMovie {
+    position: relative;
+    left: 492px;
+    text-align: center;
+
+}
+
+#dateOfMovie {
+    position: relative;
+    left: 588.79px;
+    
+
+}
+
+#addMovie {
+    position: relative;
+    left: 657px;
+
+}
+
+#addMovie button{
+    width: 121.94px;
+    height: 43.3px;
+
+
+    background: #C4C4C4;
+    border-radius: 3px;
+    border: none;
+
+    
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+    color: #000000;
+}
+
+
+#table-scroll {
+    height:150px;
+    overflow:auto;  
+    margin-top:20px;
+  }
+
+
+  #arrow img{
+    width: 83px;
+    height: 74px;
+   max-height: 74px;
+   max-width: 83px;
+  
+   left: 5px;
+  
+}
+  
+#arrow {
+   position: absolute;
+   left: -2px;
+   top: 14px;
+  
+} 
+  
+#nearArrow {
+
+    position: relative;
+    width: 54px;
+    height: 22px;
+    left: 76px;
+    top: 29px;
+
+    font-family: 'Arvo';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+}
+
+input {
+    border: 0;
+    outline: 0;
+    width: 350px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
+    font-family: 'Arvo';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+
+button {
+    
+    width: 105px;
+    height: 31px;
+   
+    
+    background: #FFFFFF;
+    border-radius: 3px;
+
+    border: 0;
+    outline: 0;
+    
+    
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 15px;
+
+    color: #000000;
+
+}
+
+select {
+    border:0;
+    outline: 0;
+}
+
+option:checked {
+    border: 0;
+    outline: 0;
+}
+
+#checkMovie:hover {
+    color:black;
+}
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+
+html {
+    font-family: Arvo;
+    font-size: 25px;
+}
+
 a {
     font-family: Arvo;
 
@@ -50,7 +370,7 @@ a {
 
 #location_nav {
     position: absolute;
-    left: 261px;
+    left: 78px;
     top: 80.15px;
     width: 1252.32px;
     height: 39.42px;
@@ -321,7 +641,7 @@ button {
     padding:0px 0px 0px 40px;
     display: inline-block;
     list-style: none;
-    width:350px;
+    width:380px;
     font-size: 24px;
     text-align: right;
     font-style: normal;
