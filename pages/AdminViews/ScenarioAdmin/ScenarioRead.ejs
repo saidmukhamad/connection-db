@@ -25,8 +25,7 @@
         <div style = " position: absolute; left: 115px; top: 60px;">
             scenarios
         </div>
-        
-        <% let id = idScenario; let look = `/ScenarioEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idScenario=${id}` %> 
+        <% let id = table[0][0].IdScenario; let look = `/ScenarioEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idScenario=${id}` %> 
 
         <h1 onclick="window.location.href = '<%= look %>'" style="position: absolute; text-align: center; top: 36px; left: 609px;" >READ</h1>
 

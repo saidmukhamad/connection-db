@@ -1229,17 +1229,17 @@ app.get('/MovieAdd', (req,res) => {
 
 
 app.post('/MovieAdd', (req,res) => {
-    if (req.query == undefined) {
-        res.redirect('http://localhost:3001/log')
-    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
-        res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
-    } else {
+    // if (req.query == undefined) {
+    //     res.redirect('http://localhost:3001/log')
+    // } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
+    //     res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
+    // } else {
     console.log(req.body); 
     let state = [`exec addMovie '${req.body.title}','${req.body.length}', '${req.body.genre}', '${req.body.status}',
     '${req.body.date}'`]
     bd.request(state)
-    res.redirect(`${req.body.page}`)
-}})
+    res.redirect(req.body.page)
+})
 
 app.get('/ScenarioToMovie', (req,res) => {
     if (req.query == undefined) {
@@ -1766,10 +1766,9 @@ app.get('/DeleteDirectorFromMovie', (req,res) => {
                 else {
                     console.log(req.query)
                     let state = [`exec DeleteWorkerFromMovie ${req.query.idMovie}, ${req.query.idWorker}`];
-                    state = bd.request(state);
-
-                  
-
+                    state = bd.request(state)
+                    let page = `/MovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${req.query.idMovie}`
+                    
                     res.redirect(`${page}`)
                 }
 
