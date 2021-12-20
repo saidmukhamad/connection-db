@@ -78,67 +78,19 @@ html {
 }
 
 .Position {
-    position: absolute;
-    top: 180px;
-    left: 150px;
+    position: relative;
+    left: 25%;
+    top: 150px;
+    overflow-y:scroll;
     scroll-behavior: smooth;
  
 
 }
 
-.Position {
-
-}
 
 
 
-#title{
-    position: absolute;
-    width: 71.58px;
-    height: 39.42px;
-    left: 176.68px;
-    top: 200.58px;
-    
 
-
-}
-
-#length{
-    
-    position: absolute;
-    width: 98.26px;
-    height: 39.42px;
-    left: 508.68px;
-    top: 200.58px;
-
-}
-
-
-#genre {
-    position: absolute;
-    width: 89.77px;
-    height: 39.42px;
-    left: 808.26px;
-    top: 200.58px;
-}
-
-#date {
-    position: absolute;
-    width: 66.72px;
-    height: 39.42px;
-    left: 1004.79px;
-    top: 200.58px;
-}   
-
-
-#add {
-    position: absolute;
-    width: 36px;
-    height: 22px;
-    left: 1190px;
-    top: 200.58px;
-
-}
 
 #margin_test {
     font-family: Arvo;
@@ -168,71 +120,6 @@ td  {
 }
 
 
-
-
-
-#titleOfMovie {
-    position: relative;
-    left: 74.68px;
-    text-align: center;
-
-    font-family: Arvo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-
-    color: #FFFFFF;
-    
-}
-
-
-#lengthOfMovie {
-    position: relative;
-    left: 270.68px;
-    margin: 20px;
-}
-
-#genreOfMovie {
-    position: relative;
-    left: 492px;
-    text-align: center;
-
-}
-
-#dateOfMovie {
-    position: relative;
-    left: 588.79px;
-    
-
-}
-
-#addMovie {
-    position: relative;
-    left: 657px;
-
-}
-
-#addMovie button{
-    width: 121.94px;
-    height: 43.3px;
-
-
-    background: #C4C4C4;
-    border-radius: 3px;
-    border: none;
-
-    
-    font-family: Arvo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-
-    color: #000000;
-}
-
-
 #table-scroll {
     height:150px;
     overflow:auto;  
@@ -257,10 +144,16 @@ td  {
   
 #arrow {
    position: absolute;
-   left: -2px;
+   left: 2px;
    top: 14px;
   
 } 
+
+#nearArrow {
+    position: absolute;
+    left: 50px;
+    top: 40px;
+}
 
 
 

@@ -32,11 +32,14 @@
                     
                     <div id = "information">
                         <form method="post">
+                            <% console.log[table] %> 
                             <input type="hidden" name="login" value="<%= session[0] %>">
                             <input type="hidden" name="password" value="<%= session[1]%>">
                             <input type="hidden" name="state" value="<%= session[2] %>">
                             <input type="hidden" name="roleId" value="<%= session[3] %>">
                             <input type="hidden" name="idMovie" value="<%= id %>">
+                            <input type="hidden" name="status" value="1">
+
                             
                             Title = <input name="title" value="<%= table[0][0].title %>" type="text" > 
 

@@ -151,7 +151,7 @@
 }
 
 td  {
-    top: -60px;
+    top: 0px;
     padding: 40px 0px 0px 0px;
     
 
@@ -161,49 +161,7 @@ td  {
 
 
 
-#titleOfMovie {
-    position: relative;
-    left: 74.68px;
-    text-align: center;
-
-    font-family: Arvo;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: 22px;
-
-    color: #FFFFFF;
-    
-}
-
-
-#lengthOfMovie {
-    position: relative;
-    left: 270.68px;
-    margin: 20px;
-}
-
-#genreOfMovie {
-    position: relative;
-    left: 492px;
-    text-align: center;
-
-}
-
-#dateOfMovie {
-    position: relative;
-    left: 588.79px;
-    
-
-}
-
-#addMovie {
-    position: relative;
-    left: 657px;
-
-}
-
-#addMovie button{
+button {
     width: 121.94px;
     height: 43.3px;
 
@@ -223,8 +181,110 @@ td  {
 }
 
 
+
 #table-scroll {
     height:150px;
     overflow:auto;  
     margin-top:20px;
   }
+
+
+#accept {
+    position: relative;
+    /* left: 600px; */
+    left: 450px;
+    top: -65.58px;
+
+}
+  
+
+#actor {
+    position: absolute;
+    width: 71.58px;
+    height: 39.42px;
+    left: 294.68px;
+    top: 170.58px;
+}
+
+#movie {
+    position: absolute;
+    width: 71.58px;
+    height: 39.42px;
+    left: 578.68px;
+    top: 170.58px;
+}
+
+#date {
+    position: absolute;
+    width: 48px;
+    height: 30px;
+    left: 827px;
+    top: 170.58px;
+    
+}
+
+#status {
+    position: absolute;
+    width: 48px;
+    height: 30px;
+    left: 970px;
+    top: 170.58px;
+}
+
+
+
+#actor_ {
+    position: relative;
+    text-align: center;
+    width: 180.58px;
+    height: 39.42px;
+    left: 234.68px;
+    top: -65.58px;
+
+
+   font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+#movie_ {
+    position: relative;
+    width: 71.58px;
+    height: 39.42px;
+    left: 350.68px;
+    top: -65.58px;
+}
+
+#date_ {
+    position: relative;
+    width: 48px;
+    height: 30px;
+    left: 450px;
+    top: -65.58px;
+    
+}
+
+#status_ {
+    position: relative;
+    width: 48px;
+    height: 30px;
+    left: 530px;
+    top: -65.58px;
+}
+
+#addScenario:hover {
+    color: black;
+}
+
+#font {
+    font-family: Arvo;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+
+    text-align: center;
+}
+

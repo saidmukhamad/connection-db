@@ -15,7 +15,7 @@
     <div class="PositionColor" style = "margin-top: 25px;">
 
     
-        <% let data = `/MovieWorkers?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${idMovie}`  %>
+        <% let data = `/MovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${idMovie}`  %>
    
         <a id = "arrow"  href="<%= data %>">
             <img src=".\regPage\arrow.png">
@@ -26,39 +26,42 @@
             <table style="position: relative; left: 80px;" id = 'test'>
                 <thead>
                     <tr id = "hovertd">
-                        <td id = "TitleScenario">name</td>
-                        <td id = "AuthorScenario">surname</td>
+                        <td id = "TitleScenario">Title</td>
+                        <td id = "AuthorScenario">Author</td>
 
                         
                     </tr>
+
+                   <% console.log(table) %>
                    
                 </thead>
                 <tbody id = "font">
-                    <form method = "post">
-
-                        <input type="hidden" name="idMovie" value="<%= idMovie %>">
-                                             
-                        <input type="hidden" name="login" value="<%= session[0] %>">
-                        <input type="hidden" name="password" value="<%= session[1]%>">
-                        <input type="hidden" name="status" value="<%= session[2] %>">
-                        <input type="hidden" name="roleId" value="<%= session[3] %>">
-                    
+                   
                         <% columns.forEach(function(column, index){ %>
                         <% column = Object.values(column) %>
                         <tr>
+
+                            <form method = "post">
+
+                                <input type="hidden" name="idMovie" value="<%= idMovie %>">
+                                                     
+                                <input type="hidden" name="login" value="<%= session[0] %>">
+                                <input type="hidden" name="password" value="<%= session[1]%>">
+                                <input type="hidden" name="status" value="<%= session[2] %>">
+                                <input type="hidden" name="roleId" value="<%= session[3] %>">
+                                <input type="hidden" name="idWorker" value="<%=column[0]%>">
+
+                            
                                 <% console.log(column) %> 
 
                                 
                                 <td id ="titleOfScenario"><%= column[1] %> </td>
                                 <td id = "authorOfScenario"><%= column[2] %></td>
                                 <td id = "aboutScenario">
-                                   
-                                        
-                                        <label class="switch">
-                                        <input type="checkbox" name="idWorker" value="<%=column[0]%>">
-                                        <span class="slider round"></span>
-                                      </label>
                                     
+                                    <button type="submit">Add</button>
+                                    
+                                    </form>
 
                                 </td>
 
@@ -67,7 +70,6 @@
                     <% }); %>
                     <button style ="position: relative; top:780px; left: 550px; "type="submit">submit</button>
 
-                </form>
 
                   
                   

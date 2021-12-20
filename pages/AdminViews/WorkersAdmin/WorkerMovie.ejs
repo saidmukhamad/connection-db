@@ -4,7 +4,7 @@
 
 <head>
 
-    <link href=".\AdminViews\WorkersAdmin\WorkersAdmin.css" rel="stylesheet" type="text/css">
+    <link href=".\AdminViews\WorkersAdmin\WorkerMovie.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -28,9 +28,9 @@
 
             <% table.forEach(columns => { %>
             
-                <table>
+                <table class ="Position">
                     <thead>
-                        <tr id = "hovertd">
+                        <tr id = "">
                             <% let transition = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&sort='Title'&idSort=${session[4]}`  %> 
                             <td onclick = "window.location.href=''" id = "title">Name</td>
                             <td id = "length">Title</td>
@@ -39,7 +39,7 @@
                        
                     </thead>
                     <div id = #tablescroll>
-                    <tbody id = "margin_test">
+                    <tbody id = "">
 
                             <% columns.forEach(function(column, index){ %>
 

@@ -6,6 +6,33 @@
 
     <link href=".\AdminViews\WorkersAdmin\WorkersAdmin.css" rel="stylesheet" type="text/css">
 
+    <style>
+         select option:focus {
+            border:0px;
+            outline:0px;
+            -webkit-appearance: none;
+            outline: none !important;
+        }
+
+        select  {
+            border:0px;
+            outline:0px;
+            -webkit-appearance: none;
+            outline: none !important;
+
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), #C4C4C4;
+            color:white;
+
+            font-family: Arvo;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 22px;
+            line-height: 30px;
+
+        }
+    </style>
+
+
 </head>
 
 <body id = "backForPage">
@@ -55,13 +82,32 @@
 
             <% table.forEach(columns => { %>
             
-                <table>
+                <table class="Position">
                     <thead>
                         <tr>
-                            <td>Name</td>
-                            <td>Surname</td>
-                            <td>Phone</td>
-                            <td>State</td>
+                            <td id = "position" >Name</td>
+                            <td id = "position" >Surname</td>
+                            <td id = "position" >Phone</td>
+                            <td id = "position" >
+                                <form method="post">
+                                    <select name="roleId" onchange="this.form.submit()">
+                                        <option disabled selected value> Role </option>
+                                        <option  value="1">Admin</option>
+                                        <option  value="2">Director</option>
+                                        <option  value="3">Actor</option>
+
+                                        <input type="hidden" name="login" value="<%= session[0] %>">
+                                        <input type="hidden" name="password" value="<%= session[1]%>">
+                                        <input type="hidden" name="state" value="<%= session[2] %>">
+                                        <input type="hidden" name="roleId" value="<%= session[3] %>">
+
+                                        
+                                    </select>
+                                </form>
+                            
+                            
+                            </td>
+                            <td id = "position" >State</td>
                             
                         </tr>
                        

@@ -4,7 +4,7 @@
 
 <head>
 
-    <link href=".\AdminViews\ScenarioAdmin\ScenarioRead.css" rel="stylesheet" type="text/css">
+    <link href=".\AdminViews\ScenarioAdmin\ScenarioAbout.css" rel="stylesheet" type="text/css">
 
 </head>
 
@@ -13,7 +13,7 @@
     <a href=""></a>
     <!-- <h1>ScnearioS</h1> -->
 
-    <% let data_ = `/MovieAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+    <% let data_ = `/ScenarioAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
 
       
     <div class="PositionColor" style = "margin-top: 25px;">
@@ -21,11 +21,41 @@
         <a id = "arrow"  href="<%= data_ %>">
             <img src=".\regPage\arrow.png">
         </a>
+        
+        <div style = " position: absolute; left: 115px; top: 60px;">
+            scenarios
+        </div>
+        
+        <% let id = idScenario; let look = `/ScenarioEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idScenario=${id}` %> 
+
+        <h1 onclick="window.location.href = '<%= look %>'" style="position: absolute; text-align: center; top: 36px; left: 609px;" >READ</h1>
 
         <%console.log(table)%>
-        <p>Title: <%=table[0][0].title%></p>
-        <p>Author: <%=table[0][0].author%></p>
-        <p>text: <%=table[0][0].text%></p>
+        
+        <div class = "body_table">
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    scenario
+                </div>
+                <div style="position:relative; text-align: center; left: -40px;">
+                    <%=table[0][0].title%>
+                </div>
+            </div>
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    author
+                </div>
+                <div style="position:relative; text-align: center; left: -40px;"><%=table[0][0].author%>
+                </div>
+            </div>
+            
+            <textarea style="color:white; padding:40px 40px 0px 40px;" readonly><%=table[0][0].text%>
+            </textarea>
+    
+        </div>
+       
 
 
     
@@ -36,3 +66,4 @@
 
 </body>
 </html>
+

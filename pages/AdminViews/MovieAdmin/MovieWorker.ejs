@@ -4,33 +4,40 @@
 
 <head>
 
-    <link href=".\AdminViews\MovieAdmin\MovieAdmin.css" rel="stylesheet" type="text/css">
+    <link href=".\AdminViews\MovieAdmin\MovieWorker.css" rel="stylesheet" type="text/css">
 
 </head>
 
 <body id = "backForPage">
 
-    <!-- <h1>MOVIEs</h1> -->
+    <% console.log(table) %> 
+
 
     <div class="PositionColor" style = "margin-top: 25px;">
-        
-       
+        <% let data_ = `/MovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${idMovie}`  %>
+
+        <a id = "arrow"  href="<%= data_ %>">
+            <img src=".\regPage\arrow.png">
+        </a>
+        <a id = "nearArrow">about movie</a>
 
     
 
             <% table.forEach(columns => { %>
                
-                <table>
+                <table class="Position">
                     <thead>
-                        <tr id = "hovertd">
+                        <tr id = >
                             <% let transition = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&sort='Title'&idSort=${session[4]}`  %> 
-                            <td onclick = "window.location.href=''" id = "Name">Title</td>
-                            <td id = "length">Length</td>
+                            <td id = "Name">Name</td>
+                            <td >Surname</td>
+                            <td>Movie</td>
+
                            
                             
                             <% let data_ = `/WorkerToMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${idMovie}`  %>
 
-                            <td id = "add" onclick = "window.location.href='<%= data_ %>'">add</td>
+                            <td style="position:absolute; left: 760px;" onclick = "window.location.href='<%= data_ %>'">add</td>
                             
                         </tr>
                        
@@ -41,14 +48,15 @@
                             <% columns.forEach(function(column, index){ %>
 
                                 <% column = Object.values(column) %>
-                                <% let transmission = `/MovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${column[0]}`%> 
-    
+                                <% let transmission = `/WorkersProfile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${column[0]}`%> 
+                            
                                 <tr>
-                                    <td id = "titleOfMovie"><%=column[1] %></td>
-                                    <td style = "text-align: center ;" id = "lengthOfMovie"><%=column[2] %></td>
-                                    <td id = "genreOfMovie"><%=column[3] %></td>
-                                    <td id = "dateOfMovie"><%=column[4] %></td>
-                                    <td id = "addMovie"><button><a onclick = "window.location.href='<%= transmission %>'">about</a></button></td>
+                                    <td ><%=column[1] %></td>
+                                    <td style = "text-align: center ;" ><%=column[2] %></td>
+                                    <td ><%=column[3] %></td>
+                                    <td ><button><a onclick = "window.location.href='<%= transmission %>'">about</a></button></td>
+                                    <% let delete_ = `/DeleteWorkerFromMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${idMovie}&idWorker=${column[0]}` %>
+                                    <td><button><a onclick = "window.location.href='<%=delete_ %>'" >delete</a></button></td>
                                     
                                 </tr> 
     

@@ -19,13 +19,13 @@
 
 
 
-        <% let data_ = `/Profile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+        <% let data_ = `/WorkersAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
 
             
             <a id = "arrow"  href="<%= data_ %>">
                 <img src=".\regPage\arrow.png">
             </a>
-            <a id = "nearArrow">profile</a>
+            <a id = "nearArrow">workers</a>
 
 
 
@@ -44,44 +44,119 @@
             <input type="hidden" name="roleId" value="<%= session[3] %>">
 
 
-             <p>Name: <input  type="text" name="name" value="<%= table[0][0].name %>"></p>
-             <p>Surname <input  type="text" name="surname" value="<%= table[0][0].surname %>"></p>
-             <p>patronymic <input  type="text" name="patronymic" value="<%= table[0][0].patronymic %>"> </p>
- 
-             <% let data = table[0][0].birthdate.split('.');  %> 
-             <p>birthdate  <input type="date" style = "width: 180px; "name="birthdate" value = "<%=`${data[2]}-${data[1]}-${data[0]}`%>"></p>
-             
-             <p>phone number <input type="phone" name="phone" value="<%= table[0][0].phone %>"></p>
- 
-             <p>
-                email <input type="email" name="email" value="<%= table[0][0].email %>">
-             </p>
-             <p>
-                login <input disabled style="color: black;" type="text" name="login" value="<%= table[0][0].login %>">
-             </p>
-             <p>    <select name="ROLEID" id="">
-                           
-                role: <% if (table[0][0].roleId == 1){ %>
-                    <option selected value="1">admin</option>
-                    <option value="2">director</option>
-                    <option value="3">actor</option>
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    name
+                </div>
+                <div style="text-align: right;">
+                    <input  type="text" name="surname" value="<%= table[0][0].name %>">
+                </div>
+            </div>
+
            
-               <%  } else if(table[0][0].roleId == 2) { %>
-                <option value="1">admin</option>
-                <option selected value="2">director</option>
-                <option value="3">actor</option>
-               <% } else { %>
-                <option  value="1">admin</option>
-                <option value="2">director</option>
-                <option selected value="3">actor</option>
-                <% } %> 
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    surname
+                </div>
+                <div style="text-align: right;">
+                    <input  type="text" name="surname" value="<%= table[0][0].surname %>">
+                </div>
+            </div>
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    patronymic
+                </div>
+                <div style="text-align: right;">
+                    <input  type="text" name="patronymic" value="<%= table[0][0].patronymic %>"> 
+                </div>
+            </div>
+
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    birthdate
+                </div>
+                <div style="text-align: right;">
+                    <% let data = table[0][0].birthdate.split('.');  %> 
+                    <input type="date" style = "width: 180px; "name="birthdate" value = "<%=`${data[2]}-${data[1]}-${data[0]}`%>">
+                </div>
+            </div>
+
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    phone
+                </div>
+                <div style="text-align: right;">
+                    <input type="phone" name="phone" value="<%= table[0][0].phone %>">
+                </div>
+            </div>
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    email
+                </div>
+                <div style="text-align: right;">
+                    <input type="email" name="email" value="<%= table[0][0].email %>">
+                </div>
+            </div>
+            
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    login
+                </div>
+                <div style="text-align: right;">
+                    <input disabled style="color: black;" type="text" name="login" value="<%= table[0][0].login %>">
+                </div>
+            </div>
+
+
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    role
+                </div>
+                <div style="text-align: right; font-size: 18px; color:black;">
+                    <select name="ROLEID" style="outline: 0; border: 0;">
+                     
+            
+                        <% if (table[0][0].roleId == 1){ %>
+
+                            <option selected value="1">admin</option>
+                            <option value="2">director</option>
+                            <option value="3">actor</option>
+                   
+                       <%  } else if(table[0][0].roleId == 2) { %>
+                        <option value="1">admin</option>
+                        <option selected value="2">director</option>
+                        <option value="3">actor</option>
+                       <% } else { %>
+                        <option  value="1">admin</option>
+                        <option value="2">director</option>
+                        <option selected value="3">actor</option>
+                        <% } %> 
+                        
                     </select>
-             </p>
+                     
+                </div>
+            </div>
+
+            
+          
+            <div class = 'name'>
+                <div style="text-align: left;">
+                    <%let id = table[0][0].WorkerId; let edit = `/WorkersEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${id}`%> 
+
+                    <button type="submit" style = "color:black" onclick="window.location.href = '<%=edit%>' ">submit</button>
+                </div>
+            
+            </div>
+
+
+             
  
-             <%let id = table[0][0].WorkerId; let edit = `/WorkersEdit?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idWorker=${id}`%> 
  
  
-             <button type="submit" style = "color:black" onclick="window.location.href = '<%=edit%>' ">submit</button>
             
         </form>
            

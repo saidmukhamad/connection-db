@@ -44,7 +44,7 @@
                 </a>
     
                 
-                <% let data5 = `/ArchiveAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+                <% let data5 = `/Profile?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
                 <a onclick = "window.location.href='<%=data5%>'" >
                     Profile
                 </a>
@@ -56,15 +56,16 @@
                 <h1>Запросов пока нет</h1>
            <%} else { %>
             <% table.forEach(columns => { %>
-            
+
+              
                 <table>
                     <thead>
-                        <tr>
+                        <tr >
                             
-                                <td>title</td>
-                                <td>name</td>
-                                <td>date</td>
-                                <td>status</td>
+                                <td id="actor">Actor</td>
+                                <td id="movie">Movie</td>
+                                <td id= "date">Date</td>
+                                <td id = "status">Status</td>
                             
                             
                         </tr>
@@ -73,17 +74,26 @@
                     <tbody>
                         <% columns.forEach(function(column, index){ %>
                             <% column = Object.values(column) %>
-                            <tr>
+                            <tr id = "font">
 
-                                    <td> <%=column[3]%> </td>
-                                    <td> <%=column[4]%> </td>
-                                    <td> <%=column[5]%> </td>
-                                    <td> <%=column[6]%> </td>
-                                    <% if(column[6] == false) { %>
+                                    <td id="actor_"> <%=column[4]%> </td>
+                                    <td id="movie_"> <%=column[3]%> </td>
+                                    <td id ="date_"> <%=column[5]%> </td>
+                                    <td id = "status_"> <%=column[6]%> </td>
+                                    
+                                    <% if(column[6] == null) { %>
                                         <% let accept = `/AcceptRequest?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idRequest=${column[2]}&idMovie=${column[0]}&idWorker=${column[1]}` %> 
+                                        <% let decline = `/DeclineRequest?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idRequest=${column[2]}` %> 
                                                                                                                                                                 
-                                        <td><button onclick="window.location.href='<%=accept%>'">accept</button></td>
-                                   <% } %> 
+                                        <td><button id ="accept" style="width: 50px;" onclick="window.location.href='<%=accept%>'">+</button>
+                                        <button id ="accept"  style="width: 50px;"onclick="window.location.href='<%=decline%>'">-</button></td>
+
+                                   <% } else if (column[6] == false) { %>
+                                    <% let accept = `/AcceptRequest?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idRequest=${column[2]}&idMovie=${column[0]}&idWorker=${column[1]}` %> 
+                                                                                                                                                                
+                                    <td><button id ="accept" onclick="window.location.href='<%=accept%>'">accept</button></td>
+                                    
+                                <%}%> 
 
                             </tr> 
                         <% }); %>

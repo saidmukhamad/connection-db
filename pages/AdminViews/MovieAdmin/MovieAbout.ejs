@@ -28,7 +28,7 @@
             <div class = "about">
                  
 
-
+                    <%console.log(table)%>
                     
                     
                     <div id = "information">
@@ -48,15 +48,45 @@
 
                              <% let CheckWorkers = `/MovieWorkers?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
                              <p>Workers <button  style = "position: relative; top: -5px;" onclick = "window.location.href='<%=CheckWorkers%>'">watch</button></p>
+                             
+                            
+                             <% if(table[2][0] == undefined) { %>
+                                <% let AddDirector = `/DirectorToMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
+
+                                 <p> director <button onclick = "window.location.href='<%=AddDirector%>'"> add </button> </p>
+                             <%}  else { %>
+                                <%let dir = table[2][0].IdWorker; let DeleteDirector = `/DeleteDirectorFromMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}&idWorker=${dir}`%> 
+
+                               
+                                 <p>Director <%=table[2][0].name%> <%= table[2][0].surname %> 
+                                 <button onclick = "window.location.href='<%=DeleteDirector%>'" > delete </button></p>
+                              <%} %>
+
+                             
                         <% } else { %>
                             <% let AddScenario = `/ScenarioToMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
                             <p>Scenario <button  style = "position: relative; top: -5px;" onclick = "window.location.href='<%=AddScenario%>'">add</button></p>
-                            
-                            
-                            
+
                             <% let CheckWorkers = `/MovieWorkers?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
-                            <p>Workers <button  style = "position: relative; top: -5px;" onclick = "window.location.href='<%=CheckWorkers%>'">watch</button></p>
-                        <% } %> 
+                            <p>Actors <button  style = "position: relative; top: -5px;" onclick = "window.location.href='<%=CheckWorkers%>'">watch</button></p>
+                            
+                            <% if(table[2][0] == undefined) { %>
+                                <% let AddDirector = `/DirectorToMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}`%> 
+
+                                 <p> director <button onclick = "window.location.href='<%=AddDirector%>'"> add </button> </p>
+                             <%}  else { %>
+                                <%let dir = table[2][0].IdWorker; let DeleteDirector = `/DeleteDirectorFromMovie?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${id}&idWorker=${dir}`%> 
+
+                               
+                                 <p>Director <%=table[2][0].name%> <%= table[2][0].surname %> 
+                                 <button onclick = "window.location.href='<%=DeleteDirector%>'" > delete </button></p>
+                              <%} %>
+                            
+                            
+                       
+                       
+                       
+                       <% } %> 
                    
                    
 

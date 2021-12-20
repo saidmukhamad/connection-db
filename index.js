@@ -252,7 +252,11 @@ app.get('/MovieAbout', (req,res) => {
             if (answer == false) {res.redirect('http://localhost:3001/log')}
                 else {
                     state = [`	SELECT idMovie, title, length, genre, status, FORMAT(date, 'dd.MM.yyyy') AS 'release'  FROM Movie where idMovie = ${req.query.idMovie}`, 
-                            `exec WatchScenario ${req.query.idMovie}`];
+                            `exec WatchScenario ${req.query.idMovie}`,
+                             `Select StudioWorker.IdWorker, StudioWorker.name, StudioWorker.surname from StudioWorker
+                            Join MovieWorker on MovieWorker.IdWorker = StudioWorker.IdWorker
+                            Join Movie on MovieWorker.idMovie = Movie.IdMovie
+                            Where (Movie.IdMovie = ${req.query.idMovie}) and (Movie.state != 0) and (StudioWorker.state != 0) and (StudioWorker.roleId = 2)`];
 
                     let tables = bd.request(state);
 
@@ -273,7 +277,7 @@ app.get('/MovieAbout', (req,res) => {
 app.get('/MovieEdit', (req,res) => {
     if (req.query == undefined) {
         res.redirect('http://localhost:3001/log')
-    } else if ((req.query.roleId !=  '1' && '2' )) {
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
         res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
     }  else
     if (req.query == undefined) {
@@ -307,12 +311,13 @@ app.get('/MovieEdit', (req,res) => {
 app.post('/MovieEdit', (req, res) => {
     if (req.query == undefined) {
         res.redirect('http://localhost:3001/log')
-    } else if ((req.query.roleId !=  '1' && '2' )) {
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
         res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
     }  else
     if (req.body == undefined) {
         res.redirect('http://localhost:3001/log')
-    } else {               
+    } else {              
+   
         let check = bd.checkConnection(req.body.login, req.body.password, req.body.roleId);
         let session = [req.body.login, req.body.password, req.body.state, req.body.roleId];
         check.then(answer => {
@@ -321,7 +326,7 @@ app.post('/MovieEdit', (req, res) => {
 
                     console.log(req.body)
                     state = [`Update Movie set title = '${req.body.title}', length = ${req.body.length}, status = '${req.body.status}', date = '${req.body.date}', genre = '${req.body.genre}' where IdMovie = ${req.body.idMovie}`];
-
+                    console.log(state)
                     let tables = bd.request(state);
 
                     tables.then(() => {
@@ -336,6 +341,74 @@ app.post('/MovieEdit', (req, res) => {
 })
 
 
+app.get('/ScenarioEdit', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
+        res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
+    }  else
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {               
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    let state = [`Select idScenario, title, author, text from Scenario where idScenario = ${req.query.idScenario} `];
+
+                    let tables = bd.request(state);
+                    
+
+                    tables.then(table => {
+                        console.log(table)
+                        res.render(__dirname + '/pages/AdminViews/ScenarioAdmin/ScenarioEdit.ejs', {
+                            table: table,
+                            session: session
+                        })
+                    })
+                
+                }
+
+        })
+    }
+})
+
+
+
+app.post('/ScenarioEdit', (req, res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
+        res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
+    }  else
+    if (req.body == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {               
+        let check = bd.checkConnection(req.body.login, req.body.password, req.body.roleId);
+        let session = [req.body.login, req.body.password, req.body.state, req.body.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+
+                    console.log(req.body)
+                    state = [`Update Scenario set title = '${req.body.title}', author = '${req.body.author}', text = '${req.body.text}' where idScenario = ${req.body.idScenario}`];
+
+                    let tables = bd.request(state);
+
+                    tables.then(() => {
+                        res.redirect(`http://localhost:3001/ScenarioAbout?login=${req.body.login}&password=${req.body.password}&state=${req.body.state}&roleId=${req.body.roleId}&idScenario=${req.body.idScenario}`)
+                    })
+                    
+                
+                }
+
+        })
+    }
+})
+
+
+
 
 
 // Добавление фильма
@@ -343,7 +416,7 @@ app.post('/MovieEdit', (req, res) => {
 app.get('/MovieAdd', (req,res) => {
     if (req.query == undefined) {
         res.redirect('http://localhost:3001/log')
-    } else if ((req.query.roleId !=  '1' && '2' )) {
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
         res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
     } else {
     let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
@@ -364,7 +437,7 @@ app.get('/MovieAdd', (req,res) => {
 app.post('/MovieAdd', (req,res) => {
     if (req.query == undefined) {
         res.redirect('http://localhost:3001/log')
-    } else if ((req.query.roleId !=  '1' && '2' )) {
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
         res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
     } else {
     console.log(req.body); 
@@ -377,7 +450,7 @@ app.post('/MovieAdd', (req,res) => {
 app.get('/ScenarioToMovie', (req,res) => {
     if (req.query == undefined) {
         res.redirect('http://localhost:3001/log')
-    } else if ((req.query.roleId !=  '1' && '2' )) {
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
         res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
     }  else {
         let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
@@ -405,7 +478,7 @@ app.get('/ScenarioToMovie', (req,res) => {
 app.post('/ScenarioToMovie', (req, res) => {
     if (req.query == undefined) {
         res.redirect('http://localhost:3001/log')
-    } else if ((req.query.roleId !=  '1' && '2' )) {
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
         res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
     }  else
     if (req.body == undefined) {
@@ -436,7 +509,7 @@ app.post('/ScenarioToMovie', (req, res) => {
 app.get('/DeleteScenarioFromMovie', (req,res) => {
     if (req.query == undefined) {
         res.redirect('http://localhost:3001/log')
-    } else if ((req.query.roleId !=  '1' && '2' )) {
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
         res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
     } else {
         console.log(req.query)
@@ -463,7 +536,7 @@ app.get('/DeleteScenarioFromMovie', (req,res) => {
 app.get('/AddToArchive', (req,res) => {
     if (req.query == undefined) {
         res.redirect('http://localhost:3001/log')
-    } else if ((req.query.roleId !=  '1' && '2' )) {
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
         res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
     }  else {
         let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
@@ -488,7 +561,7 @@ app.get('/AddToArchive', (req,res) => {
 app.get('/RemoveFromArchive', (req,res) => {
     if (req.query == undefined) {
         res.redirect('http://localhost:3001/log')
-    } else if ((req.query.roleId !=  '1' && '2' )) {
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
         res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
     }  else {
         let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
@@ -527,7 +600,8 @@ app.get('/ScenarioRead', (req,res) => {
                         res.render(__dirname + '/pages/AdminViews/ScenarioAdmin/ScenarioRead.ejs', {
                             session: session,
                             table: table,
-                            idMovie: req.query.idMovie
+                            idMovie: req.query.idMovie,
+                            idScenario: req.query.idScenario
                         })
                     })
                 }
@@ -595,6 +669,41 @@ app.get('/WorkersAdmin', (req,res) => {
 })
 
 
+app.post('/WorkersAdmin', (req,res) => {
+    console.log(req.body, 'ПРОВЕРОЧКА')
+    console.log(req.body.roleId[0],'TEST', req.body.roleId[1])
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else if ((req.body.roleId[1] !=  '1')) {
+        res.redirect(`http://localhost:3001/Profile?login=${req.body.login}&password=${req.body.password}&state=${req.body.state}&roleId=${req.body.roleId[1]}`);
+    }  else {
+    console.log(req.body)
+    let check = bd.checkConnection(req.body.login, req.body.password, req.body.roleId[1]);
+    let session = [req.body.login, req.body.password, req.body.state, req.body.roleId[1]];
+    check.then(answer => {
+        console.log(answer, 'вывожу ответ')
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+            else {
+                state = [`SELECT IdWorker, name, surname, phone, roleId, state FROM StudioWorker where roleId = ${req.body.roleId[0]}  order by idWorker ASC`];
+
+
+                let tables = bd.request(state);
+
+
+                tables.then(table => {
+                    console.log(table)
+                    res.render(__dirname + '/pages/AdminViews/WorkersAdmin/WorkersAdmin.ejs', {
+                        table: table,
+                        session: session
+                    })
+                })
+            }
+
+        })
+    }
+})
+
+
 app.get('/WorkersMovie', (req,res) => {
 
     if (req.query == undefined) {
@@ -625,7 +734,7 @@ app.get('/WorkersMovie', (req,res) => {
 
 
 
-app.get('/MovieWorkers', (req,res) => {
+app.get('/WorkersMovie', (req,res) => {
 
     if (req.query == undefined) {
         res.redirect('http://localhost:3001/log')
@@ -637,7 +746,38 @@ app.get('/MovieWorkers', (req,res) => {
         state = [`Select StudioWorker.IdWorker, StudioWorker.name, Movie.title from StudioWorker
         Join MovieWorker on MovieWorker.IdWorker = StudioWorker.IdWorker
         Join Movie on MovieWorker.idMovie = Movie.IdMovie
-        Where (Movie.IdMovie = ${req.query.idMovie}) and (Movie.state != 0)`];
+        Where (StudioWorker.IdWorker = ${req.query.idWorker}) and (Movie.state != 0)`];
+   
+        let tables = bd.request(state);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId, req.query.sort];
+
+        tables.then(table => {
+
+            res.render(__dirname + '/pages/AdminViews/WorkersAdmin/WorkersMovie', {
+                table: table,
+                session: session,
+                idMovie: req.query.idMovie 
+            })
+        })
+    })
+}
+})
+
+
+
+app.get('/MovieWorkers', (req,res) => {
+
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+        state = [`Select StudioWorker.IdWorker, StudioWorker.name, StudioWorker.surname, Movie.title, Movie.idMovie from StudioWorker
+        Join MovieWorker on MovieWorker.IdWorker = StudioWorker.IdWorker
+        Join Movie on MovieWorker.idMovie = Movie.IdMovie
+        Where (Movie.IdMovie = ${req.query.idMovie}) and (Movie.state != 0) and (StudioWorker.roleId = 3)`];
    
         let tables = bd.request(state);
         let session = [req.query.login, req.query.password, req.query.state, req.query.roleId, req.query.sort];
@@ -685,6 +825,7 @@ app.get('/WorkerToMovie', (req,res) => {
 
 
 
+
 app.post('/WorkerToMovie', (req, res) => {
     console.log(req.body)
     if (req.body == undefined) {
@@ -713,6 +854,64 @@ app.post('/WorkerToMovie', (req, res) => {
                     })
                    
                     
+                    res.redirect(`http://localhost:3001/MovieWorkers?login=${req.body.login}&password=${req.body.password}&state=${req.body.status}&roleId=${req.body.roleId}&idMovie=${req.body.idMovie}`)
+                  
+                    
+                
+                }
+
+        })
+    }
+})
+
+
+app.get('/DirectorToMovie', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    let state = [`(Select idWorker, name, surname from StudioWorker where state = 1 and roleId = 2) except (Select StudioWorker.IdWorker, StudioWorker.name, StudioWorker.surname from StudioWorker
+                    Join MovieWorker on MovieWorker.IdWorker = StudioWorker.IdWorker
+                    Join Movie on MovieWorker.idMovie = Movie.IdMovie
+                    Where (Movie.IdMovie = ${req.query.idMovie}) and (Movie.state != 0))`];
+                    state = bd.request(state);
+                    state.then((table)=>{
+                        res.render(__dirname +'/pages/AdminViews/MovieAdmin/DirectorToMovie', {
+                            table: table,
+                            session: session,
+                            idMovie: req.query.idMovie
+                        })
+                    })
+                }
+
+        })
+    }
+})
+
+
+app.post('/DirectorToMovie', (req, res) => {
+    console.log(req.body)
+    if (req.body == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {               
+        let check = bd.checkConnection(req.body.login, req.body.password, req.body.roleId);
+        let session = [req.body.login, req.body.password, req.body.state, req.body.roleId];
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                   
+                
+            
+                        state = [`exec AddWorkerInMovie ${req.body.idMovie}, ${req.body.idWorker}`];
+
+                        let tables = bd.request(state);
+    
+                   
+                    
                     res.redirect(`http://localhost:3001/MovieAbout?login=${req.body.login}&password=${req.body.password}&state=${req.body.status}&roleId=${req.body.roleId}&idMovie=${req.body.idMovie}`)
                   
                     
@@ -721,6 +920,63 @@ app.post('/WorkerToMovie', (req, res) => {
 
         })
     }
+})
+
+app.get('/DeleteDirectorFromMovie', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
+        res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
+    } else {
+        console.log(req.query)
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+
+
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    console.log(req.query)
+                    let state = [`exec DeleteWorkerFromMovie ${req.query.idMovie}, ${req.query.idWorker}`];
+                    state = bd.request(state);
+                    let page = `/MovieAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${req.query.idMovie}`
+
+
+                    res.redirect(`${page}`)
+                }
+
+        })
+    }
+
+})
+
+
+app.get('/DeleteWorkerFromMovie', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else if ((req.query.roleId !=  '1') && (req.query.roleId !=  '2' )) {
+        res.redirect(`http://localhost:3001/Profile?login=${req.query.login}&password=${req.query.password}&state=${req.query.state}&roleId=${req.query.roleId}`);
+    } else {
+        console.log(req.query)
+        let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+        let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+
+
+        check.then(answer => {
+            if (answer == false) {res.redirect('http://localhost:3001/log')}
+                else {
+                    console.log(req.query)
+                    let state = [`exec DeleteWorkerFromMovie ${req.query.idMovie}, ${req.query.idWorker}`];
+                    state = bd.request(state);
+                    let page = `/MovieWorkers?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idMovie=${req.query.idMovie}`
+
+
+                    res.redirect(`${page}`)
+                }
+
+        })
+    }
+
 })
 
 
@@ -967,7 +1223,7 @@ app.get('/RequestsAdmin', (req,res) => {
             else {
                 state = [`	Select Request.IdMovie, Request.IdWorker ,Request.IdRequest,  Movie.title, StudioWorker.name, FORMAT(Request.date, 'dd.MM.yyyy') AS 'date', Request.status from Movie
                 Join Request on Request.idMovie = Movie.IdMovie
-                Join StudioWorker  on StudioWorker.IdWorker = Request.IdWorker`];
+                Join StudioWorker  on StudioWorker.IdWorker = Request.IdWorker Order by status ASC`];
 
 
                 let tables = bd.request(state);
@@ -998,6 +1254,32 @@ app.get('/AcceptRequest', (req,res) => {
                 console.log(req.query)
 
                 let state = [`exec CommitRequest ${req.query.idRequest}, ${req.query.idMovie}, ${req.query.idWorker}`];
+
+                state = bd.request(state);
+
+                let page = `/RequestsAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`
+
+                state.then(table => {
+                    res.redirect(page);
+                })
+            }
+
+        })
+    }
+})
+
+app.get('/DeclineRequest', (req,res) => {
+    if (req.query == undefined) {
+        res.redirect('http://localhost:3001/log')
+    } else {
+    let check = bd.checkConnection(req.query.login, req.query.password, req.query.roleId);
+    let session = [req.query.login, req.query.password, req.query.state, req.query.roleId];
+    check.then(answer => {
+        if (answer == false) {res.redirect('http://localhost:3001/log')}
+            else {
+                console.log(req.query)
+
+                let state = [`Update Request set status = 0 where idRequest = ${req.query.idRequest}`];
 
                 state = bd.request(state);
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <link href=".\AdminViews\ScenarioAdmin\ScenarioAbout.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body id = "backForPage">
+
+    <a href=""></a>
+    <!-- <h1>ScnearioS</h1> -->
+
+    <% let data_ = `/ScenarioAdmin?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}`  %>
+
+      
+    <div class="PositionColor" style = "margin-top: 25px;">
+            
+        <a id = "arrow"  href="<%= data_ %>">
+            <img src=".\regPage\arrow.png">
+        </a>
+        
+        <div style = " position: absolute; left: 115px; top: 60px;">
+            scenarios
+        </div>
+
+        <% let id =table[0][0].idScenario; let look = `/ScenarioAbout?login=${session[0]}&password=${session[1]}&state=${session[2]}&roleId=${session[3]}&idScenario=${id}` %> 
+
+        <h1 onclick="window.location.href = '<%= look %>'" style="position: absolute; text-align: center; top: 36px; left: 609px;" >EDIT</h1>
+
+
+        <%console.log(table)%>
+        
+        <div class = "body_table">
+            <form method="post">
+
+                <input type="hidden" name="login" value="<%= session[0] %>">
+                <input type="hidden" name="password" value="<%= session[1]%>">
+                <input type="hidden" name="state" value="<%= session[2] %>">
+                <input type="hidden" name="roleId" value="<%= session[3] %>">
+                <input type="hidden" name="idScenario" value="<%= id %>">
+                            
+                <div class = 'name'>
+                    <div style="text-align: left;">
+                        scenario
+                    </div>
+                    <div style="position:relative; text-align: center; left: -40px;">
+                        <input type="text" name="title" value = "<%=table[0][0].title%>">
+                    </div>
+                </div>
+    
+                <div class = 'name'>
+                    <div style="text-align: left;">
+                        author
+                    </div>
+                    <div style="position:relative; text-align: center; left: -40px;">
+                        <input type="text" name = "author" value="<%=table[0][0].author%>">
+                    </div>
+                </div>
+                
+                <div  style="padding:40px 40px 0px 40px; ">
+                    <textarea type="text" name = "text"><%=table[0][0].text%></textarea> 
+                </div>
+                
+                <button style = "position: absolute; top: 32px; left: 1051px; background-color: white;"type="submit">submit</button>
+            </form>
+           
+        </div>
+       
+
+
+    
+        
+       
+     
+    </div>
+
+</body>
+</html>

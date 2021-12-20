@@ -78,15 +78,12 @@ html {
 }
 
 .Position {
-    position: absolute;
-    top: 180px;
-    left: 150px;
+    position: relative;
+    left: 230px;
+    top: 150px;
+    overflow-y:scroll;
     scroll-behavior: smooth;
  
-
-}
-
-.Position {
 
 }
 
@@ -257,10 +254,16 @@ td  {
   
 #arrow {
    position: absolute;
-   left: -2px;
+   left: 2px;
    top: 14px;
   
 } 
+
+#nearArrow {
+    position: absolute;
+    left: 50px;
+    top: 40px;
+}
 
 
 
